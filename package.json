@@ -1,0 +1,11 @@
+{
+  "name": "basic-refuel-app",
+  "version": "0.1.0",
+  "scripts": {
+    "serve-frontend": "cd vue-frontend && yarn serve",
+    "serve-backend": "cd node-backend && node ./",
+    "serve-stack": "yarn serve-frontend $$ yarn serve-backend"
+  },
+  "repository": "https://github.com/FBuervenich/basic-refuel-app",
+  "author": "Florentin Bürvenich <florentin@familie-buervenich.de>"
+}
