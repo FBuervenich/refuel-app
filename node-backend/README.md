@@ -1,6 +1,6 @@
 # Node backend
 
-Node API based on (this boilerplate)[https://github.com/talyssonoc/node-api-boilerplate].
+Node API based on [this boilerplate](https://github.com/talyssonoc/node-api-boilerplate).
 
 ## Quick start
 
