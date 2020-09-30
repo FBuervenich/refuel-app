@@ -6,7 +6,7 @@ module.exports = {
   up: function (queryInterface) {
     const testUsers = [];
 
-    for (let i = 0; i < 20000; i++) {
+    for (let i = 0; i < 50; i++) {
       testUsers.push({
         name: dataFaker.name(),
         createdAt: new Date(),
