@@ -6,10 +6,10 @@ describe('Infra :: User :: SequelizeUserMapper', () => {
   describe('.toEntity', () => {
     it('returns user instance with passed attributes', () => {
       const mockedSequelizeUser = {
-        dataValues: {
+        get: () => ({
           id: 1,
-          name: 'The Name'
-        }
+          name: 'The Name',
+        }),
       };
 
       const entity = SequelizeUserMapper.toEntity(mockedSequelizeUser);
@@ -23,7 +23,7 @@ describe('Infra :: User :: SequelizeUserMapper', () => {
   describe('.toDatabase', () => {
     it('returns user object prepared to be persisted', () => {
       const user = new User({
-        name: 'Some User'
+        name: 'Some User',
       });
 
       const dbUser = SequelizeUserMapper.toDatabase(user);

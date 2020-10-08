@@ -22,7 +22,7 @@ const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware')
 
 const logger = require('./infra/logging/logger');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
-const { database, User: UserModel } = require('./infra/database/models');
+const { database, UserModel } = require('./infra/database/models');
 
 const container = createContainer();
 
