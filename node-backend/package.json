@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node cluster.js",
     "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon",
+    "debug": "cross-env NODE_PATH=. NODE_ENV=development nodemon --inspect",
     "test": "npm run test:all",
     "test:all": "npm run test:unit && npm run test:features",
     "test:unit": "cross-env NODE_PATH=. NODE_ENV=test mocha --opts test/mocha.opts.unit",
@@ -27,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "awilix": "^4.2.6",
-    "awilix-express": "^0.11.0",
+    "awilix-express": "^1.1.0",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
