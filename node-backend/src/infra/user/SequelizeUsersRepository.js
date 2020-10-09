@@ -20,7 +20,7 @@ class SequelizeUsersRepository {
   async add(user) {
     const { valid, errors } = user.validate();
 
-    if(!valid) {
+    if (!valid) {
       const error = new Error('ValidationError');
       error.details = errors;
 
@@ -49,7 +49,7 @@ class SequelizeUsersRepository {
 
       const { valid, errors } = userEntity.validate();
 
-      if(!valid) {
+      if (!valid) {
         const error = new Error('ValidationError');
         error.details = errors;
 
@@ -59,7 +59,7 @@ class SequelizeUsersRepository {
       await transaction.commit();
 
       return userEntity;
-    } catch(error) {
+    } catch (error) {
       await transaction.rollback();
 
       throw error;
@@ -74,9 +74,9 @@ class SequelizeUsersRepository {
 
   async _getById(id) {
     try {
-      return await this.UserModel.findById(id, { rejectOnEmpty: true });
-    } catch(error) {
-      if(error.name === 'SequelizeEmptyResultError') {
+      return await this.UserModel.findByPk(id, { rejectOnEmpty: true });
+    } catch (error) {
+      if (error.name === 'SequelizeEmptyResultError') {
         const notFoundError = new Error('NotFoundError');
         notFoundError.details = `User with id ${id} can't be found.`;
 
