@@ -7,21 +7,19 @@ class UpdateUser extends Operation {
   }
 
   async execute(userId, userData) {
-    const {
-      SUCCESS, NOT_FOUND, VALIDATION_ERROR, ERROR
-    } = this.outputs;
+    const { SUCCESS, NOT_FOUND, VALIDATION_ERROR, ERROR } = this.outputs;
 
     try {
       const user = await this.usersRepository.update(userId, userData);
       this.emit(SUCCESS, user);
-    } catch(error) {
-      switch(error.message) {
-      case 'ValidationError':
-        return this.emit(VALIDATION_ERROR, error);
-      case 'NotFoundError':
-        return this.emit(NOT_FOUND, error);
-      default:
-        this.emit(ERROR, error);
+    } catch (error) {
+      switch (error.message) {
+        case 'ValidationError':
+          return this.emit(VALIDATION_ERROR, error);
+        case 'NotFoundError':
+          return this.emit(NOT_FOUND, error);
+        default:
+          this.emit(ERROR, error);
       }
     }
   }

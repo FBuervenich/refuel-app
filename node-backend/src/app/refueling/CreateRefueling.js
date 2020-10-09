@@ -2,9 +2,9 @@ const Operation = require('src/app/Operation');
 const Refueling = require('src/domain/refueling/Refueling');
 
 class CreateRefueling extends Operation {
-  constructor({ refuelingRepository }) {
+  constructor({ refuelingsRepository }) {
     super();
-    this.refuelingRepository = refuelingRepository;
+    this.refuelingsRepository = refuelingsRepository;
   }
 
   async execute(refuelingData) {
@@ -13,7 +13,7 @@ class CreateRefueling extends Operation {
     const refueling = new Refueling(refuelingData);
 
     try {
-      const newRefueling = await this.refuelingRepository.add(refueling);
+      const newRefueling = await this.refuelingsRepository.add(refueling);
 
       this.emit(SUCCESS, newRefueling);
     } catch (error) {

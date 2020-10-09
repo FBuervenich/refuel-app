@@ -11,7 +11,16 @@ const {
   DeleteUser,
 } = require('./app/user');
 
+const {
+  CreateRefueling,
+  GetAllRefuelings,
+  GetRefueling,
+  UpdateRefueling,
+  DeleteRefueling,
+} = require('./app/refueling');
+
 const UserSerializer = require('./interfaces/http/user/UserSerializer');
+const RefuelingSerializer = require('./interfaces/http/refueling/RefuelingSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -22,7 +31,12 @@ const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware')
 
 const logger = require('./infra/logging/logger');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
-const { database, UserModel } = require('./infra/database/models');
+const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
+const {
+  database,
+  UserModel,
+  RefuelingModel,
+} = require('./infra/database/models');
 
 const container = createContainer();
 
@@ -54,12 +68,14 @@ container
 // Repositories
 container.register({
   usersRepository: asClass(SequelizeUsersRepository).singleton(),
+  refuelingsRepository: asClass(SequelizeRefuelingsRepository).singleton(),
 });
 
 // Database
 container.register({
   database: asValue(database),
   UserModel: asValue(UserModel),
+  RefuelingModel: asValue(RefuelingModel),
 });
 
 // Operations
@@ -69,11 +85,18 @@ container.register({
   getUser: asClass(GetUser),
   updateUser: asClass(UpdateUser),
   deleteUser: asClass(DeleteUser),
+
+  createRefueling: asClass(CreateRefueling),
+  getAllRefuelings: asClass(GetAllRefuelings),
+  getRefueling: asClass(GetRefueling),
+  updateRefueling: asClass(UpdateRefueling),
+  deleteRefueling: asClass(DeleteRefueling),
 });
 
 // Serializers
 container.register({
   userSerializer: asValue(UserSerializer),
+  refuelingSerializer: asValue(RefuelingSerializer),
 });
 
 module.exports = container;
