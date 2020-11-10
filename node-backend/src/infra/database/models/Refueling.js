@@ -25,6 +25,10 @@ module.exports = function (Sequelize, sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      fullTank: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
     {
       sequelize,

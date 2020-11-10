@@ -23,6 +23,10 @@ const Refueling = attributes({
     type: Number,
     required: false,
   },
+  fullTank: {
+    type: Boolean,
+    required: true,
+  },
 })(
   class Refueling {
     /**
