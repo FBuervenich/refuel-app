@@ -17,7 +17,7 @@ const Refueling = attributes({
   },
   totalKilometers: {
     type: Number,
-    required: true,
+    required: false,
   },
   dayKilometers: {
     type: Number,

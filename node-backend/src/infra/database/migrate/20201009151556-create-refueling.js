@@ -2,48 +2,23 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('refuelings', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      litres: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      price: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      pricePerLitre: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      totalKilometers: {
+    return Promise.all([
+      queryInterface.addColumn('refuelings', 'totalKilometers', {
         allowNull: true,
         type: Sequelize.FLOAT,
-      },
-      dayKilometers: {
+      }),
+      queryInterface.addColumn('refuelings', 'fullTank', {
         allowNull: true,
-        type: Sequelize.FLOAT,
-      },
-      fullTank: {
-        allowNull: false,
         type: Sequelize.BOOLEAN,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
+      }),
+    ]);
   },
   down: function (queryInterface) {
-    return queryInterface.dropTable('refuelings');
+    // return queryInterface.dropTable('refuelings');
+
+    return Promise.all([
+      queryInterface.removeColumn('refuelings', 'totalKilometers'),
+      queryInterface.removeColumn('refuelings', 'fullTank'),
+    ]);
   },
 };

@@ -11,12 +11,16 @@ module.exports = {
       const pricePerLitre = random.float(0.5, 1.5);
       const price = litres * pricePerLitre;
       const fullTank = random.boolean();
+      const totalKilometers = 50000 + random.int(1000, 200000);
+      const dayKilometers = random.int(50, 1000);
 
       testRefuelings.push({
         litres,
         price,
         pricePerLitre,
         fullTank,
+        totalKilometers,
+        dayKilometers,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

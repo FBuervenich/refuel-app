@@ -219,7 +219,7 @@
         },
         "responses": {
           "201": {
-            "description": "User created successfully",
+            "description": "Refueling created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -229,7 +229,7 @@
             }
           },
           "400": {
-            "description": "User not created because of validation error",
+            "description": "Refueling not created because of validation error",
             "content": {
               "application/json": {
                 "schema": {
@@ -395,13 +395,7 @@
         ]
       },
       "NewRefueling": {
-        "required": [
-          "litres",
-          "price",
-          "pricePerLitre",
-          "totalKilometers",
-          "dayKilometers"
-        ],
+        "required": ["litres", "price", "pricePerLitre"],
         "properties": {
           "litres": {
             "type": "number"
@@ -417,6 +411,9 @@
           },
           "dayKilometers": {
             "type": "number"
+          },
+          "fullTank": {
+            "type": "boolean"
           }
         }
       },
