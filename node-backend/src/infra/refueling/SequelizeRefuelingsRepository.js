@@ -28,7 +28,7 @@ class SequelizeRefuelingsRepository {
     }
 
     const newRefueling = await this.RefuelingModel.create(
-      RefuelingMapper.toDatabase(newRefueling)
+      RefuelingMapper.toDatabase(refueling)
     );
     return RefuelingMapper.toEntity(newRefueling);
   }

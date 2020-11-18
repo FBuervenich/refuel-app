@@ -6,6 +6,7 @@ const RefuelingSerializer = {
     pricePerLitre,
     totalKilometers,
     dayKilometers,
+    fullTank,
   }) {
     return {
       id,
@@ -14,6 +15,7 @@ const RefuelingSerializer = {
       pricePerLitre,
       totalKilometers,
       dayKilometers,
+      fullTank,
     };
   },
 };
