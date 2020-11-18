@@ -7,14 +7,12 @@ describe('API :: GET /api/users', () => {
     beforeEach(() => {
       return factory.createMany('user', 2, [
         { name: 'First' },
-        { name: 'Second' }
+        { name: 'Second' },
       ]);
     });
 
     it('return success with array of users', async () => {
-      const { body } = await request()
-        .get('/api/users')
-        .expect(200);
+      const { body } = await request().get('/api/users').expect(200);
 
       expect(body).to.have.lengthOf(2);
 
@@ -28,9 +26,7 @@ describe('API :: GET /api/users', () => {
 
   context('when there are no users', () => {
     it('return success with empty array', async () => {
-      const { body } = await request()
-        .get('/api/users')
-        .expect(200);
+      const { body } = await request().get('/api/users').expect(200);
 
       expect(body).to.have.lengthOf(0);
     });

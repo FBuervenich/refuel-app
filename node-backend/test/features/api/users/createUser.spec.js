@@ -7,7 +7,7 @@ describe('API :: POST /api/users', () => {
       const { body } = await request()
         .post('/api/users')
         .send({
-          name: 'New User'
+          name: 'New User',
         })
         .expect(201);
 
@@ -19,9 +19,7 @@ describe('API :: POST /api/users', () => {
 
   context('when name is missing', () => {
     it('does not create and returns 400 with the validation error', async () => {
-      const { body } = await request()
-        .post('/api/users')
-        .expect(400);
+      const { body } = await request().post('/api/users').expect(400);
 
       expect(body.type).to.equal('ValidationError');
       expect(body.details).to.have.lengthOf(1);

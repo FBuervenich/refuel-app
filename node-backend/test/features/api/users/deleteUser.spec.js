@@ -6,12 +6,10 @@ describe('API :: DELETE /api/users/:id', () => {
   context('when user exists', () => {
     it('deletes the user and return status 202', async () => {
       const user = await factory.create('user', {
-        name: 'User'
+        name: 'User',
       });
 
-      await request()
-        .delete(`/api/users/${user.id}`)
-        .expect(202);
+      await request().delete(`/api/users/${user.id}`).expect(202);
     });
   });
 
@@ -20,12 +18,12 @@ describe('API :: DELETE /api/users/:id', () => {
       const { body } = await request()
         .delete('/api/users/0')
         .send({
-          name: 'Updated User'
+          name: 'Updated User',
         })
         .expect(404);
 
       expect(body.type).to.equal('NotFoundError');
-      expect(body.details).to.equal('User with id 0 can\'t be found.');
+      expect(body.details).to.equal("User with id 0 can't be found.");
     });
   });
 });

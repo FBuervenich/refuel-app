@@ -7,13 +7,13 @@ describe('API :: PUT /api/users/:id', () => {
     context('when sent data is ok', () => {
       it('updates and returns 202 with the updated user', async () => {
         const user = await factory.create('user', {
-          name: 'User'
+          name: 'User',
         });
 
         const { body } = await request()
           .put(`/api/users/${user.id}`)
           .send({
-            name: 'Updated User'
+            name: 'Updated User',
           })
           .expect(202);
 
@@ -25,19 +25,21 @@ describe('API :: PUT /api/users/:id', () => {
     context('when name is empty', () => {
       it('does update and returns 400 with the validation error', async () => {
         const user = await factory.create('user', {
-          name: 'User'
+          name: 'User',
         });
 
         const { body } = await request()
           .put(`/api/users/${user.id}`)
           .send({
-            name: ''
+            name: '',
           })
           .expect(400);
 
         expect(body.type).to.equal('ValidationError');
         expect(body.details).to.have.lengthOf(1);
-        expect(body.details[0].message).to.equal('"name" is not allowed to be empty');
+        expect(body.details[0].message).to.equal(
+          '"name" is not allowed to be empty'
+        );
       });
     });
   });
@@ -47,12 +49,12 @@ describe('API :: PUT /api/users/:id', () => {
       const { body } = await request()
         .put('/api/users/0')
         .send({
-          name: 'Updated User'
+          name: 'Updated User',
         })
         .expect(404);
 
       expect(body.type).to.equal('NotFoundError');
-      expect(body.details).to.equal('User with id 0 can\'t be found.');
+      expect(body.details).to.equal("User with id 0 can't be found.");
     });
   });
 });
