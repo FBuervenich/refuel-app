@@ -3,12 +3,18 @@ const logPath = path.join(__dirname, '../../logs/development.log');
 
 module.exports = {
   web: {
-    port: 3000
+    port: 3000,
   },
   logging: {
-    appenders: [
-      { type: 'console' },
-      { type: 'file', filename: logPath }
-    ]
-  }
+    appenders: {
+      out: { type: 'console' },
+      file: { type: 'file', filename: logPath },
+    },
+    categories: {
+      default: {
+        appenders: ['out', 'file'],
+        level: 'info',
+      },
+    },
+  },
 };
