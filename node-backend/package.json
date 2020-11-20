@@ -48,7 +48,7 @@
     "random": "^2.2.0",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
-    "structure": "^1.2.0",
+    "structure": "^2.0.1",
     "swagger-ui-express": "^2.0.14"
   },
   "devDependencies": {
