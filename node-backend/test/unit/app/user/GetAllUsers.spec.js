@@ -7,11 +7,11 @@ describe('App :: User :: GetAllUsers', () => {
   context('when query is successful', () => {
     before(() => {
       const MockUsersRepository = {
-        getAll: () => Promise.resolve('Imagine all the users...')
+        getAll: () => Promise.resolve('Imagine all the users...'),
       };
 
       getAllUsers = new GetAllUsers({
-        usersRepository: MockUsersRepository
+        usersRepository: MockUsersRepository,
       });
     });
 
@@ -28,11 +28,11 @@ describe('App :: User :: GetAllUsers', () => {
   context('when there is an internal error', () => {
     before(() => {
       const MockUsersRepository = {
-        getAll: () => Promise.reject(new Error('Failed'))
+        getAll: () => Promise.reject(new Error('Failed')),
       };
 
       getAllUsers = new GetAllUsers({
-        usersRepository: MockUsersRepository
+        usersRepository: MockUsersRepository,
       });
     });
 

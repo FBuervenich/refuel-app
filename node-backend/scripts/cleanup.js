@@ -17,9 +17,9 @@ const tasks = new Listr([
       return replace({
         files: routerPath,
         from: /\s*apiRouter.*UsersController'\)\);/,
-        to: ''
+        to: '',
       });
-    }
+    },
   },
   {
     title: 'Remove example files from DI container',
@@ -27,6 +27,7 @@ const tasks = new Listr([
       return replace({
         files: containerPath,
         from: [
+          /* eslint-disable no-useless-escape */
           /\s*const \{(\n.*)+.*app\/user'\);/,
           /\s*const.*UsersRepository'\);/,
           /\s*const.*UserSerializer'\);/,
@@ -34,11 +35,12 @@ const tasks = new Listr([
           /\s*usersRepository.*\}\]/,
           /\,\s*UserModel/,
           /\s+createUser(.|\n)+.*DeleteUser\n/,
-          /\s+userSerializer: UserSerializer\n/
+          /\s+userSerializer: UserSerializer\n/,
+          /* eslint-enable no-useless-escape */
         ],
-        to: ''
+        to: '',
       });
-    }
+    },
   },
   {
     title: 'Delete example files and tests',
@@ -52,41 +54,46 @@ const tasks = new Listr([
         path.join(srcPath, 'infra', 'database', 'seeds', '*.js'),
         path.join(srcPath, 'infra', 'database', 'models', 'User.js'),
         path.join(testPath, 'features', 'api', 'users', '**'),
-        path.join(testPath, 'support', 'factories', '*.js')
+        path.join(testPath, 'support', 'factories', '*.js'),
       ]);
-    }
+    },
   },
   {
     title: 'Remove example data from swagger.json',
     task() {
       writeFileSync(
         path.join(srcPath, 'interfaces', 'http', 'swagger', 'swagger.json'),
-        JSON.stringify({
-          openapi: '3.0.0',
-          info: {
-            title: 'Node API boilerplate',
-            version: 'v1'
+        JSON.stringify(
+          {
+            openapi: '3.0.0',
+            info: {
+              title: 'Node API boilerplate',
+              version: 'v1',
+            },
+            servers: [
+              {
+                description: 'Local server',
+                url: '/api',
+              },
+            ],
           },
-          servers: [
-            {
-              description: 'Local server',
-              url: '/api'
-            }
-          ]
-        }, null, '  ')
+          null,
+          '  '
+        )
       );
-    }
+    },
   },
   {
     title: 'Remove cleanup script from package.json',
     task() {
       return replace({
         files: path.join(__dirname, '..', 'package.json'),
+        /* eslint-disable-next-line no-useless-escape */
         from: /\,\s*\"cleanup.*cleanup\.js\"/,
-        to: ''
+        to: '',
       });
-    }
-  }
+    },
+  },
 ]);
 
 tasks.run().catch((err) => {

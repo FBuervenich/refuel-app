@@ -12,7 +12,7 @@ describe('API :: GET /api/refuelings', () => {
 
       return factory.createMany('refueling', 2, [
         {
-          litres: 10,
+          litres: 20,
           ...sampleRefueling,
         },
         {
