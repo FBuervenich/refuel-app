@@ -60,9 +60,9 @@
     "listr": "^0.14.3",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
-    "nyc": "^11.2.1",
-    "replace-in-file": "^2.5.0",
-    "supertest": "^3.0.0",
+    "nyc": "^15.1.0",
+    "replace-in-file": "^6.1.0",
+    "supertest": "^6.0.1",
     "supertest-as-promised": "^4.0.2"
   }
 }
