@@ -8,11 +8,11 @@ describe('App :: User :: UpdateUser', () => {
     context('when data is valid', () => {
       before(() => {
         const MockUsersRepository = {
-          update: (id, data) => Promise.resolve(data)
+          update: (id, data) => Promise.resolve(data),
         };
 
         updateUser = new UpdateUser({
-          usersRepository: MockUsersRepository
+          usersRepository: MockUsersRepository,
         });
       });
 
@@ -31,11 +31,11 @@ describe('App :: User :: UpdateUser', () => {
     context('when data is invalid', () => {
       before(() => {
         const MockUsersRepository = {
-          update: () => Promise.reject(Error('ValidationError'))
+          update: () => Promise.reject(Error('ValidationError')),
         };
 
         updateUser = new UpdateUser({
-          usersRepository: MockUsersRepository
+          usersRepository: MockUsersRepository,
         });
       });
 
@@ -55,11 +55,11 @@ describe('App :: User :: UpdateUser', () => {
   context('when the user does not exist', () => {
     before(() => {
       const MockUsersRepository = {
-        update: () => Promise.reject(new Error('NotFoundError'))
+        update: () => Promise.reject(new Error('NotFoundError')),
       };
 
       updateUser = new UpdateUser({
-        usersRepository: MockUsersRepository
+        usersRepository: MockUsersRepository,
       });
     });
 
@@ -75,15 +75,14 @@ describe('App :: User :: UpdateUser', () => {
     });
   });
 
-
   context('when there is an internal error', () => {
     before(() => {
       const MockUsersRepository = {
-        update: () => Promise.reject(new Error('Some Error'))
+        update: () => Promise.reject(new Error('Some Error')),
       };
 
       updateUser = new UpdateUser({
-        usersRepository: MockUsersRepository
+        usersRepository: MockUsersRepository,
       });
     });
 
