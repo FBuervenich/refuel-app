@@ -1,7 +1,3 @@
-####################################
-#### gitignore for vue-frontend ####
-####################################
-
 .DS_Store
 node_modules
 /dist
