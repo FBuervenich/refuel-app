@@ -4,7 +4,6 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
       :router="true"
     >
       <el-menu-item :route="{ name: 'Home' }" index="1">Home</el-menu-item>
@@ -33,12 +32,7 @@ export default defineComponent({
       activeIndex: '1',
     };
   },
-  methods: {
-    handleSelect(key: string, keyPath: string) {
-      // this.$router.push('about');
-      console.log(key, keyPath);
-    },
-  },
+  methods: {},
 });
 </script>
 
