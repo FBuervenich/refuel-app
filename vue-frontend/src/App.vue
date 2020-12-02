@@ -1,10 +1,25 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <!-- <div id="nav"></div> -->
+  <AppNavbar />
+  <div id="content">
+    <router-view />
   </div>
-  <router-view />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+import AppNavbar from '@/components/layout/AppNavbar.vue';
+
+export default defineComponent({
+  setup() {
+    return {};
+  },
+  components: {
+    AppNavbar,
+  },
+});
+</script>
 
 <style>
 #app {
