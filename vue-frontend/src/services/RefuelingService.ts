@@ -1,8 +1,10 @@
+import { Refueling } from '@/store/models';
 import apiClient from '@/util/api';
 
 export default {
-  getRefuelings() {
-    return apiClient.get('refuelings');
+  async getRefuelings(): Promise<Refueling[]> {
+    const response = await apiClient.get<Refueling[]>('refuelings');
+    return response.data;
   },
   getRefueling(id: number) {
     return apiClient.get('refuelings/' + id);
