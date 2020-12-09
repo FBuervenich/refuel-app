@@ -16,6 +16,7 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.1-beta.2",
+    "moment": "^2.29.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -36,6 +37,7 @@
     "eslint": "^7.14.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^7.0.0-0",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "vuex-module-decorators": "^1.0.1"
   }
 }
