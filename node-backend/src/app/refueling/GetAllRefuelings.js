@@ -18,6 +18,8 @@ class GetAllRefuelings extends Operation {
           'pricePerLitre',
           'totalKilometers',
           'dayKilometers',
+          'fullTank',
+          'madeAt',
         ],
       });
 

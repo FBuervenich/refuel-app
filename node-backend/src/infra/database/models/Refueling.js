@@ -29,6 +29,10 @@ module.exports = function (Sequelize, sequelize, DataTypes) {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      madeAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
     {
       sequelize,

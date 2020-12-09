@@ -27,6 +27,10 @@ const Refueling = attributes({
     type: Boolean,
     required: true,
   },
+  madeAt: {
+    type: Date,
+    required: true,
+  },
 })(
   class Refueling {
     /**
