@@ -30,7 +30,6 @@ export default class Refuelings extends VuexModule {
   @MutationAction
   async fetchAll() {
     const refuelings: Refueling[] = await RefuelingService.getRefuelings();
-
     return { refuelings };
   }
 }

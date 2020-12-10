@@ -1,4 +1,5 @@
 <template>
+  <div>{{ beautifiedRefuelings.length }}</div>
   <el-table :data="beautifiedRefuelings" stripe height="750">
     <el-table-column prop="id" label="id" width="100"> </el-table-column>
     <el-table-column prop="madeAt" label="Datum" width="250"> </el-table-column>
@@ -12,7 +13,7 @@
 
 <script lang="ts">
 import { Refueling } from '@/store/models';
-import { computed, defineComponent, PropType, reactive, toRefs } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 import { formatDateToISO8601 } from '@/util/util';
 
 export default defineComponent({
@@ -26,19 +27,17 @@ export default defineComponent({
   components: {},
 
   setup(props) {
-    let state = reactive({
-      beautifiedRefuelings: computed(() =>
-        props.refuelings.map(refueling => ({
-          id: refueling.id,
-          madeAt: formatDateToISO8601(refueling.madeAt),
-          litres: refueling.litres.toFixed(2),
-          pricePerLitre: refueling.pricePerLitre.toFixed(3),
-          price: refueling.price.toFixed(3),
-        }))
-      ),
-    });
+    const beautifiedRefuelings = computed(() =>
+      props.refuelings.map(refueling => ({
+        id: refueling.id,
+        madeAt: formatDateToISO8601(refueling.madeAt),
+        litres: refueling.litres.toFixed(2),
+        pricePerLitre: refueling.pricePerLitre.toFixed(3),
+        price: refueling.price.toFixed(3),
+      }))
+    );
 
-    return { ...toRefs(state) };
+    return { beautifiedRefuelings };
   },
 });
 </script>

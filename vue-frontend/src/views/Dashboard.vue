@@ -1,15 +1,15 @@
 <template>
   <div id="wrapper">
     <RefuelingsTable :refuelings="refuelings" />
+    <button @click="reloadData">Reload</button>
   </div>
 </template>
 
 <script lang="ts">
 import RefuelingsTable from '@/components/RefuelingsTable.vue';
 
-import { defineComponent, reactive, toRefs } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { RefuelingsModule } from '@/store';
-import { Refueling } from '@/store/models';
 
 export default defineComponent({
   name: 'Dashboard',
@@ -18,13 +18,18 @@ export default defineComponent({
   },
 
   setup() {
-    let state = reactive({
-      refuelings: RefuelingsModule.refuelings as Refueling[],
-    });
+    const refuelings = computed(() => RefuelingsModule.refuelings);
 
     loadData();
 
-    return toRefs(state);
+    return {
+      reloadData,
+      refuelings,
+    };
+
+    function reloadData() {
+      RefuelingsModule.fetchAll();
+    }
 
     async function loadData() {
       await RefuelingsModule.fetchAll();
