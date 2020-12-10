@@ -1,17 +1,19 @@
 <template>
   <div>
     <el-menu
-      :default-active="activeIndex"
+      :default-active="currentRoute"
       class="el-menu-demo"
       mode="horizontal"
       :router="true"
     >
-      <el-menu-item :route="{ name: 'Home' }" index="1">Home</el-menu-item>
-      <el-menu-item :route="{ name: 'Dashboard' }" index="2"
+      <el-menu-item :route="{ name: 'Home' }" index="Home">Home</el-menu-item>
+      <el-menu-item :route="{ name: 'Dashboard' }" index="Dashboard"
         >Dashboard</el-menu-item
       >
-      <el-menu-item :route="{ name: 'About' }" index="3">About</el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item :route="{ name: 'About' }" index="About"
+        >About</el-menu-item
+      >
+      <el-menu-item index="Github">
         <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
         <a
           href="https://github.com/FBuervenich/basic-refuel-app/"
@@ -28,9 +30,12 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   data() {
-    return {
-      activeIndex: '1',
-    };
+    return {};
+  },
+  computed: {
+    currentRoute(): string {
+      return this.$route.name as string;
+    },
   },
   methods: {},
 });
