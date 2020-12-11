@@ -1,13 +1,11 @@
 <template>
-  <div>{{ beautifiedRefuelings.length }}</div>
   <el-table :data="beautifiedRefuelings" stripe height="750">
-    <el-table-column prop="id" label="id" width="100"> </el-table-column>
-    <el-table-column prop="madeAt" label="Datum" width="250"> </el-table-column>
-    <el-table-column prop="litres" label="Litres" width="180">
+    <el-table-column prop="id" label="id"> </el-table-column>
+    <el-table-column prop="madeAt" label="Datum"> </el-table-column>
+    <el-table-column prop="litres" label="Litres"> </el-table-column>
+    <el-table-column prop="pricePerLitre" label="Price per litre">
     </el-table-column>
-    <el-table-column prop="pricePerLitre" label="Price per litre" width="180">
-    </el-table-column>
-    <el-table-column prop="price" label="Price" width="180"> </el-table-column>
+    <el-table-column prop="price" label="Price"> </el-table-column>
   </el-table>
 </template>
 

@@ -1,8 +1,17 @@
 <template>
-  <!-- <div id="nav"></div> -->
   <AppNavbar />
   <div id="content">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <Suspense>
+        <template #default>
+          <component :is="Component" />
+        </template>
+        <template #fallback>
+          <!-- <BaseLoadingAnimation /> -->
+          <div>Loading...</div>
+        </template>
+      </Suspense>
+    </router-view>
   </div>
 </template>
 
@@ -10,6 +19,7 @@
 import { defineComponent } from 'vue';
 
 import AppNavbar from '@/components/layout/AppNavbar.vue';
+// import BaseLoadingAnimation from '@/components/BaseLoadingAnimation.vue';
 
 export default defineComponent({
   setup() {
@@ -17,6 +27,7 @@ export default defineComponent({
   },
   components: {
     AppNavbar,
+    // BaseLoadingAnimation,
   },
 });
 </script>
@@ -26,20 +37,6 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div id="wrapper">
+    <h2>Dashboard</h2>
     <RefuelingsTable :refuelings="refuelings" />
-    <button @click="reloadData">Reload</button>
+    <button @click="loadData">Reload</button>
   </div>
 </template>
 
@@ -17,22 +18,20 @@ export default defineComponent({
     RefuelingsTable,
   },
 
-  setup() {
+  async setup() {
+    console.log(1);
     const refuelings = computed(() => RefuelingsModule.refuelings);
 
-    loadData();
+    await loadData();
+    console.log(2);
 
     return {
-      reloadData,
+      loadData,
       refuelings,
     };
 
-    function reloadData() {
-      RefuelingsModule.fetchAll();
-    }
-
-    async function loadData() {
-      await RefuelingsModule.fetchAll();
+    function loadData() {
+      return RefuelingsModule.fetchAll();
     }
   },
 });

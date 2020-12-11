@@ -1,4 +1,5 @@
 import RefuelingService from '@/services/RefuelingService';
+// import { Sleep } from '@/util/util';
 import {
   VuexModule,
   Module,
@@ -29,6 +30,7 @@ export default class Refuelings extends VuexModule {
 
   @MutationAction
   async fetchAll() {
+    // await Sleep(2000);
     const refuelings: Refueling[] = await RefuelingService.getRefuelings();
     return { refuelings };
   }
