@@ -10,7 +10,7 @@
         <el-form-item label="Price per litre">
           <el-input
             type="number"
-            v-model.number="pricePerLitre"
+            v-model.number="formData.pricePerLitre"
             prefix-icon="el-icon-coin"
             placeholder="Please insert price per litre"
           >
@@ -20,7 +20,7 @@
         <el-form-item label="Litres">
           <el-input
             type="number"
-            v-model.number="litres"
+            v-model.number="formData.litres"
             prefix-icon="el-icon-pie-chart"
             placeholder="Please insert amount of litres"
           >
@@ -30,7 +30,7 @@
         <el-form-item label="Total price">
           <el-input
             type="number"
-            v-model.number="totalPrice"
+            v-model.number="formData.totalPrice"
             prefix-icon="el-icon-money"
             placeholder="Please insert total price"
           >
@@ -40,7 +40,7 @@
         <el-divider></el-divider>
         <el-form-item label="Full tank">
           <el-col :span="1">
-            <el-switch v-model="fullTank" class></el-switch>
+            <el-switch v-model="formData.fullTank" class></el-switch>
           </el-col>
         </el-form-item>
         <el-form-item label="Date">
@@ -48,7 +48,7 @@
             <el-date-picker
               type="date"
               placeholder="Pick a date"
-              v-model="date"
+              v-model="formData.date"
               style="width: 100%;"
             ></el-date-picker>
           </el-col>
@@ -57,7 +57,7 @@
         <el-form-item label="Day kilometers">
           <el-input
             type="number"
-            v-model.number="dayKilometers"
+            v-model.number="formData.dayKilometers"
             prefix-icon=""
             placeholder="Please insert day kilometers"
           >
@@ -77,8 +77,13 @@
         <i class="fas el-icon-fa-tachometer-alt"></i>
         <el-divider></el-divider>
         <el-form-item>
-          <el-button @click="resetState">Clear form</el-button>
-          <el-button @click="checkAndSubmit" type="primary"
+          <el-button @click="resetformData" :disabled="isLoading"
+            >Clear form</el-button
+          >
+          <el-button
+            @click="checkAndSubmit"
+            type="primary"
+            :disabled="isLoading"
             >Add refueling</el-button
           >
         </el-form-item>
@@ -88,7 +93,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, toRefs } from 'vue';
+import { computed, defineComponent, reactive, ref, toRefs } from 'vue';
 
 import { Refueling } from '@/store/models';
 import { RefuelingsModule } from '@/store';
@@ -100,55 +105,59 @@ export default defineComponent({
       type: Number,
     },
   },
-  setup(props, { emit }) {
-    const defaultState = {
+  setup(props) {
+    const defaultformData = {
       pricePerLitre: null,
       litres: null,
       totalPrice: null,
       date: new Date(),
       fullTank: true,
-      dayKilometers: 0,
+      dayKilometers: null,
       totalKilometers: null,
     };
 
-    // let state = Object.assign({}, defaultState);
-    let state = reactive(Object.assign({}, defaultState));
+    let formData = ref(Object.assign({}, defaultformData));
+    const state = reactive({
+      isLoading: false,
+    });
 
     let calculatedTotalKilometers = computed(() => {
-      return (props.lastTotalKilometers || 0) + state.dayKilometers;
+      const dayKilometers = formData.value.dayKilometers || 0;
+      const lastTotalKilometers = props.lastTotalKilometers || 0;
+      return lastTotalKilometers + dayKilometers;
     });
 
     return {
       ...toRefs(state),
-      resetState,
+      formData,
+      resetformData,
       checkAndSubmit,
       calculatedTotalKilometers,
     };
 
-    function resetState() {
-      const newState = reactive(Object.assign({}, defaultState));
-      console.log(state);
-      console.log(defaultState);
-      console.log(newState);
-      console.log(state === defaultState);
-      state = newState;
+    function resetformData() {
+      const newformData = Object.assign({}, defaultformData);
+      formData.value = newformData;
     }
 
     async function checkAndSubmit() {
-      // check
+      state.isLoading = true;
+
+      let formDataV = formData.value;
       const refueling: Refueling = {
         id: 0,
-        litres: state.litres || 0,
-        price: state.totalPrice || 0,
-        pricePerLitre: state.pricePerLitre || 0,
-        totalKilometers: state.totalKilometers || 0,
-        dayKilometers: state.dayKilometers || 0,
-        fullTank: state.fullTank,
-        madeAt: state.date || new Date(),
+        litres: formDataV.litres || 0,
+        price: formDataV.totalPrice || 0,
+        pricePerLitre: formDataV.pricePerLitre || 0,
+        totalKilometers: formDataV.totalKilometers || 0,
+        dayKilometers: formDataV.dayKilometers || 0,
+        fullTank: formDataV.fullTank,
+        madeAt: formDataV.date || new Date(),
       };
 
       await RefuelingsModule.createRefueling(refueling);
-      emit('form-submitted', refueling);
+      resetformData();
+      state.isLoading = false;
     }
   },
 });
