@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card" v-loading="isLoading">
     <template #header>
       <div class="">
         <h3>Add new refueling</h3>
@@ -97,6 +97,7 @@ import { computed, defineComponent, reactive, ref, toRefs } from 'vue';
 
 import { Refueling } from '@/store/models';
 import { RefuelingsModule } from '@/store';
+import { SuccessMessage } from '@/util/messages';
 
 export default defineComponent({
   props: {
@@ -158,6 +159,7 @@ export default defineComponent({
       await RefuelingsModule.createRefueling(refueling);
       resetformData();
       state.isLoading = false;
+      SuccessMessage.closable('Refueling was added.');
     }
   },
 });

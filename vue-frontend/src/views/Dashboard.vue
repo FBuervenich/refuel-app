@@ -2,7 +2,6 @@
   <div id="wrapper">
     <h2>Dashboard</h2>
     <RefuelingsTable :refuelings="refuelings" />
-    <button @click="loadData">Reload</button>
   </div>
 </template>
 
