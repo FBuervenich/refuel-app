@@ -5,6 +5,6 @@ export interface Refueling {
   pricePerLitre: number;
   totalKilometers: number;
   dayKilometers: number;
-  fullTank: number;
-  madeAt: number;
+  fullTank: boolean;
+  madeAt: Date;
 }

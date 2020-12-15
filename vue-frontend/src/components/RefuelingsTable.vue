@@ -12,7 +12,6 @@
 <script lang="ts">
 import { Refueling } from '@/store/models';
 import { computed, defineComponent, PropType } from 'vue';
-import { formatDateToISO8601 } from '@/util/util';
 
 export default defineComponent({
   name: 'RefuelingsTable',
@@ -28,8 +27,8 @@ export default defineComponent({
     const beautifiedRefuelings = computed(() =>
       props.refuelings.map(refueling => ({
         id: refueling.id,
-        madeAt: formatDateToISO8601(refueling.madeAt),
-        litres: refueling.litres.toFixed(2),
+        madeAt: refueling.madeAt,
+        litres: refueling.litres?.toFixed(2),
         pricePerLitre: refueling.pricePerLitre.toFixed(3),
         price: refueling.price.toFixed(3),
       }))

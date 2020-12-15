@@ -78,7 +78,9 @@
         <el-divider></el-divider>
         <el-form-item>
           <el-button @click="resetState">Clear form</el-button>
-          <el-button type="primary">Add refueling</el-button>
+          <el-button @click="checkAndSubmit" type="primary"
+            >Add refueling</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -88,6 +90,9 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from 'vue';
 
+import { Refueling } from '@/store/models';
+import { RefuelingsModule } from '@/store';
+
 export default defineComponent({
   props: {
     lastTotalKilometers: {
@@ -95,7 +100,7 @@ export default defineComponent({
       type: Number,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const defaultState = {
       pricePerLitre: null,
       litres: null,
@@ -113,7 +118,12 @@ export default defineComponent({
       return (props.lastTotalKilometers || 0) + state.dayKilometers;
     });
 
-    return { ...toRefs(state), resetState, calculatedTotalKilometers };
+    return {
+      ...toRefs(state),
+      resetState,
+      checkAndSubmit,
+      calculatedTotalKilometers,
+    };
 
     function resetState() {
       const newState = reactive(Object.assign({}, defaultState));
@@ -122,6 +132,23 @@ export default defineComponent({
       console.log(newState);
       console.log(state === defaultState);
       state = newState;
+    }
+
+    async function checkAndSubmit() {
+      // check
+      const refueling: Refueling = {
+        id: 0,
+        litres: state.litres || 0,
+        price: state.totalPrice || 0,
+        pricePerLitre: state.pricePerLitre || 0,
+        totalKilometers: state.totalKilometers || 0,
+        dayKilometers: state.dayKilometers || 0,
+        fullTank: state.fullTank,
+        madeAt: state.date || new Date(),
+      };
+
+      await RefuelingsModule.createRefueling(refueling);
+      emit('form-submitted', refueling);
     }
   },
 });

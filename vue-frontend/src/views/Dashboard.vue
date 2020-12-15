@@ -19,11 +19,8 @@ export default defineComponent({
   },
 
   async setup() {
-    console.log(1);
     const refuelings = computed(() => RefuelingsModule.refuelings);
-
     await loadData();
-    console.log(2);
 
     return {
       loadData,

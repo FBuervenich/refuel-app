@@ -1,5 +1,4 @@
 import RefuelingService from '@/services/RefuelingService';
-// import { Sleep } from '@/util/util';
 import {
   VuexModule,
   Module,
@@ -25,12 +24,11 @@ export default class Refuelings extends VuexModule {
   @Action({ commit: 'addRefueling' })
   async createRefueling(refueling: Refueling) {
     const newRefueling = await RefuelingService.postRefueling(refueling);
-    return newRefueling;
+    return newRefueling.data;
   }
 
   @MutationAction
   async fetchAll() {
-    // await Sleep(2000);
     const refuelings: Refueling[] = await RefuelingService.getRefuelings();
     return { refuelings };
   }
