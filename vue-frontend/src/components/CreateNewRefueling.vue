@@ -67,7 +67,7 @@
         <el-form-item label="Total kilometers">
           <el-input
             type="number"
-            v-model.number="calculatedTotalKilometers"
+            v-model.number="formData.totalKilometers"
             prefix-icon=""
             placeholder="Please insert total kilometers (or use pre-filled value)"
           >
@@ -93,7 +93,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref, toRefs } from 'vue';
+import { defineComponent, reactive, ref, toRefs, watch } from 'vue';
 
 import { Refueling } from '@/store/models';
 import { RefuelingsModule } from '@/store';
@@ -106,15 +106,16 @@ export default defineComponent({
       type: Number,
     },
   },
+
   setup(props) {
     const defaultformData = {
       pricePerLitre: null,
-      litres: null,
-      totalPrice: null,
+      litres: null as any,
+      totalPrice: null as any,
       date: new Date(),
       fullTank: true,
-      dayKilometers: null,
-      totalKilometers: null,
+      dayKilometers: null as any,
+      totalKilometers: null as any,
     };
 
     let formData = ref(Object.assign({}, defaultformData));
@@ -122,27 +123,59 @@ export default defineComponent({
       isLoading: false,
     });
 
-    let calculatedTotalKilometers = computed(() => {
-      const dayKilometers = formData.value.dayKilometers || 0;
-      const lastTotalKilometers = props.lastTotalKilometers || 0;
-      return lastTotalKilometers + dayKilometers;
-    });
+    watch(() => formData.value.pricePerLitre, calcTotalPrice);
+    watch(() => formData.value.litres, calcTotalPrice);
+
+    watch(() => formData.value.dayKilometers, calcTotalKilometers);
+
+    // let calculatedTotalKilometers = computed(() => {
+    //   const dayKilometers = formData.value.dayKilometers || 0;
+    //   const lastTotalKilometers = props.lastTotalKilometers || 0;
+    //   return lastTotalKilometers + dayKilometers;
+    // });
 
     return {
       ...toRefs(state),
       formData,
       resetformData,
       checkAndSubmit,
-      calculatedTotalKilometers,
     };
 
+    /**
+     * Calculates the total price based on the price per litre and the
+     * amount of litres
+     */
+    function calcTotalPrice() {
+      console.log('calcing');
+      const data = formData.value;
+      data.totalPrice = (data.pricePerLitre || 0) * (data.litres || 0);
+      data.totalPrice = Math.round(data.totalPrice * 100) / 100;
+    }
+
+    /**
+     * Calculates the total kilometers based on the day kilometers + last
+     * value of total kilometers
+     */
+    function calcTotalKilometers() {
+      const dayKilometers = formData.value.dayKilometers || 0;
+      const lastTotalKilometers = props.lastTotalKilometers || 0;
+      formData.value.totalKilometers = lastTotalKilometers + dayKilometers;
+    }
+
+    /**
+     * Resets all the form's data fields to it's defaults
+     */
     function resetformData() {
       const newformData = Object.assign({}, defaultformData);
       formData.value = newformData;
     }
 
+    /**
+     * Checks the inputs and submit the data
+     */
     async function checkAndSubmit() {
       state.isLoading = true;
+      Math;
 
       let formDataV = formData.value;
       const refueling: Refueling = {

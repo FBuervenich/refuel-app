@@ -1,9 +1,13 @@
 import axios from 'axios';
 
-export default axios.create({
+const api = axios.create({
   baseURL: '/api',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
+
+// api.interceptors.request.use(config => {});
+
+export default api;
