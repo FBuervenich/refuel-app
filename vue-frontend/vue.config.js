@@ -15,6 +15,8 @@ module.exports = {
   transpileDependencies: ['vuex-module-decorators'],
 
   configureWebpack: {
-    plugins: [new webpack.EnvironmentPlugin(['API_URL'])],
+    plugins: [
+      new webpack.DefinePlugin({ VUE_APP_API_URL: process.env.API_URL }),
+    ],
   },
 };

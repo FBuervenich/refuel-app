@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NODE_ENV === 'production' ? API_URL : '/api';
+const API_BASE_URL =
+  process.env.NODE_ENV === 'production' ? VUE_APP_API_URL : '/api';
 
 console.log('API URL is: ', API_BASE_URL);
 const api = axios.create({
