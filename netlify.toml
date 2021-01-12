@@ -5,4 +5,4 @@
   publish = "dist/"
 
 [context.production]
-    environment = { API_URL = "http://localhost:8080" }
+    environment = { API_URL = "http://google.de" }
