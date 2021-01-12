@@ -1,0 +1,8 @@
+[build]
+
+  base = "vue-frontend/"
+  command = "yarn build"
+  publish = "dist/"
+
+[context.production]
+    environment = { API_URL = "http://localhost:8080" }
