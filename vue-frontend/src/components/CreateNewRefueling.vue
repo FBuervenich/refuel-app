@@ -128,12 +128,6 @@ export default defineComponent({
 
     watch(() => formData.value.dayKilometers, calcTotalKilometers);
 
-    // let calculatedTotalKilometers = computed(() => {
-    //   const dayKilometers = formData.value.dayKilometers || 0;
-    //   const lastTotalKilometers = props.lastTotalKilometers || 0;
-    //   return lastTotalKilometers + dayKilometers;
-    // });
-
     return {
       ...toRefs(state),
       formData,
