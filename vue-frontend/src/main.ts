@@ -5,6 +5,9 @@ import router from './router';
 
 import api from '@/util/api';
 
+const authConfig = require('../auth_config.json');
+import { setupAuth } from './auth';
+
 // element plus UI Library (https://github.com/element-plus/element-plus)
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
@@ -25,7 +28,16 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 app
   .use(router)
   .use(store)
-  .use(ElementPlus)
-  .mount('#app');
+  .use(ElementPlus);
+
+function callbackRedirect(appState: any) {
+  router.push(appState && appState.targetUrl ? appState.targetUrl : '/');
+}
+
+setupAuth(authConfig, callbackRedirect).then((auth: any) => {
+  console.log('setup auth then');
+  app.use(auth);
+  app.mount('#app');
+});
 
 app.provide('api', api);
