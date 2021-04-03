@@ -86,7 +86,6 @@ export const routeGuard = (to, from, next) => {
       appState: { targetUrl: to.fullPath },
       redirect_uri: location.origin + process.env.BASE_URL + 'callback',
       responseType: 'id_token',
-      audience: 'https://refuel-app--api-prod.herokuapp.com/api',
     });
   };
 

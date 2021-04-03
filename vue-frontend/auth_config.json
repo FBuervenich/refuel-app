@@ -1,4 +1,5 @@
 {
   "domain": "fbuervenich.eu.auth0.com",
-  "client_id": "XEYJf2fTHwj96C8JMMlJo4xgnrwyCbF4"
+  "client_id": "XEYJf2fTHwj96C8JMMlJo4xgnrwyCbF4",
+  "audience": "https://refuel-app--api-prod.herokuapp.com/api"
 }
