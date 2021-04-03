@@ -34,10 +34,11 @@ function callbackRedirect(appState: any) {
   router.push(appState && appState.targetUrl ? appState.targetUrl : '/');
 }
 
-setupAuth(authConfig, callbackRedirect).then((auth: any) => {
-  console.log('setup auth then');
+setupAuth(authConfig, callbackRedirect).then(async (auth: any) => {
   app.use(auth);
   app.mount('#app');
+
+  app.provide('api', api);
 });
 
-app.provide('api', api);
+export default app;

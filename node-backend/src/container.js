@@ -30,6 +30,7 @@ const devErrorHandler = require('./interfaces/http/errors/devErrorHandler');
 const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware');
 
 const logger = require('./infra/logging/logger');
+const auth0Middleware = require('./infra/authentication/auth0middleware');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
 const {
@@ -58,6 +59,9 @@ container
 container
   .register({
     loggerMiddleware: asFunction(loggerMiddleware).singleton(),
+  })
+  .register({
+    authenticationMiddleWare: asValue(auth0Middleware),
   })
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),

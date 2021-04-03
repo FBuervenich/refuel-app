@@ -1,12 +1,13 @@
 const express = require('express');
 
 class Server {
-  constructor({ config, router, logger }) {
+  constructor({ config, router, logger, authenticationMiddleWare }) {
     this.config = config;
     this.logger = logger;
     this.express = express();
 
     this.express.disable('x-powered-by');
+    this.express.use(authenticationMiddleWare);
     this.express.use(router);
   }
 
