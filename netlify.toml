@@ -5,4 +5,4 @@
   publish = "dist/"
 
 [context.production]
-    environment = { API_URL = "'https://refuel-app.herokuapp.com/api/'" }
+    environment = { API_URL = "'https://refuel-app--api-prod.herokuapp.com/api/'" }
