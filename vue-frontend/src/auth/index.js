@@ -85,8 +85,8 @@ export const routeGuard = (to, from, next) => {
     loginWithRedirect({
       appState: { targetUrl: to.fullPath },
       redirect_uri: location.origin + process.env.BASE_URL + 'callback',
+      responseType: 'id_token',
     });
-    // loginWithRedirect({ redirect_uri: location.href });
   };
 
   // If loading has already finished, check our auth state using `fn()`
@@ -128,8 +128,6 @@ export const setupAuth = async (options, callbackRedirect) => {
     state.user = await client.getUser();
     state.loading = false;
   }
-
-  console.log('setup auth end');
 
   return {
     install: app => {
