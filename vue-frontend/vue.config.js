@@ -20,4 +20,11 @@ module.exports = {
       new webpack.DefinePlugin({ VUE_APP_API_URL: process.env.API_URL }),
     ];
   },
+
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      args[0].title = 'Refuel app';
+      return args;
+    });
+  },
 };
