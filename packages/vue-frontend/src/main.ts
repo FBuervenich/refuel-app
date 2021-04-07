@@ -6,6 +6,7 @@ import router from './router';
 import api from '@/util/api';
 
 const authConfig = require('../auth_config.json');
+// @ts-ignore
 import { setupAuth } from './auth';
 
 // element plus UI Library (https://github.com/element-plus/element-plus)

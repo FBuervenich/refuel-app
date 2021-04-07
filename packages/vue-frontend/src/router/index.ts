@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import CallbackPage from '@/views/Callback.vue';
 import ErrorPage from '@/views/Error.vue';
+// @ts-ignore
 import { routeGuard } from '@/auth';
 
 const routes = [
