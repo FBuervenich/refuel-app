@@ -20,7 +20,7 @@ const RefuelingsController = {
       const { SUCCESS, ERROR } = getAllRefuelings.outputs;
 
       getAllRefuelings
-        .on(SUCCESS, (refuelings) => {
+        .on(SUCCESS, refuelings => {
           res
             .status(Status.OK)
             .json(refuelings.map(refuelingSerializer.serialize));
@@ -35,10 +35,10 @@ const RefuelingsController = {
     const { SUCCESS, ERROR, NOT_FOUND } = getRefueling.outputs;
 
     getRefueling
-      .on(SUCCESS, (refueling) => {
+      .on(SUCCESS, refueling => {
         res.status(Status.OK).json(refuelingSerializer.serialize(refueling));
       })
-      .on(NOT_FOUND, (error) => {
+      .on(NOT_FOUND, error => {
         res.status(Status.NOT_FOUND).json({
           type: 'NotFoundError',
           details: error.details,
@@ -54,12 +54,12 @@ const RefuelingsController = {
       const { SUCCESS, ERROR, VALIDATION_ERROR } = createRefueling.outputs;
 
       createRefueling
-        .on(SUCCESS, (refueling) => {
+        .on(SUCCESS, refueling => {
           res
             .status(Status.CREATED)
             .json(refuelingSerializer.serialize(refueling));
         })
-        .on(VALIDATION_ERROR, (error) => {
+        .on(VALIDATION_ERROR, error => {
           res.status(Status.BAD_REQUEST).json({
             type: 'ValidationError',
             details: error.details,
@@ -81,18 +81,18 @@ const RefuelingsController = {
       } = updateRefueling.outputs;
 
       updateRefueling
-        .on(SUCCESS, (refueling) => {
+        .on(SUCCESS, refueling => {
           res
             .status(Status.ACCEPTED)
             .json(refuelingSerializer.serialize(refueling));
         })
-        .on(VALIDATION_ERROR, (error) => {
+        .on(VALIDATION_ERROR, error => {
           res.status(Status.BAD_REQUEST).json({
             type: 'ValidationError',
             details: error.details,
           });
         })
-        .on(NOT_FOUND, (error) => {
+        .on(NOT_FOUND, error => {
           res.status(Status.NOT_FOUND).json({
             type: 'NotFoundError',
             details: error.details,
@@ -111,7 +111,7 @@ const RefuelingsController = {
       .on(SUCCESS, () => {
         res.status(Status.ACCEPTED).end();
       })
-      .on(NOT_FOUND, (error) => {
+      .on(NOT_FOUND, error => {
         res.status(Status.NOT_FOUND).json({
           type: 'NotFoundError',
           details: error.details,
