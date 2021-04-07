@@ -1,6 +1,6 @@
 [build]
 
-  base = "vue-frontend/"
+  base = "packages/vue-frontend/"
   command = "yarn build"
   publish = "dist/"
 
