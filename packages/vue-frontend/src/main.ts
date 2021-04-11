@@ -13,6 +13,9 @@ import { setupAuth } from './auth';
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 
+// global styles
+import '@/assets/styles/main.scss';
+
 // font awesome (https://github.com/FortAwesome/vue-fontawesome)
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';

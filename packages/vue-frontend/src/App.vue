@@ -1,20 +1,23 @@
 <template>
-  <div>
+  <div id="wrapper">
     <AppNavbar />
-    <div id="content">
+    <div class="content">
       <router-view v-slot="{ Component }">
         <Suspense>
           <template #default>
             <component :is="Component" />
           </template>
           <template #fallback>
-            <!-- <BaseLoadingAnimation /> -->
-            <div>Loading...</div>
+            <BaseLoadingAnimation />
           </template>
         </Suspense>
       </router-view>
     </div>
-    <AppFooter />
+    <footer class="footer">
+      <div id="footer">
+        <AppFooter />
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -23,7 +26,7 @@ import { defineComponent } from 'vue';
 
 import AppNavbar from '@/components/layout/AppNavbar.vue';
 import AppFooter from '@/components/layout/AppFooter.vue';
-// import BaseLoadingAnimation from '@/components/BaseLoadingAnimation.vue';
+import BaseLoadingAnimation from '@/components/BaseLoadingAnimation.vue';
 
 export default defineComponent({
   setup() {
@@ -32,12 +35,25 @@ export default defineComponent({
   components: {
     AppNavbar,
     AppFooter,
-    // BaseLoadingAnimation,
+    BaseLoadingAnimation,
   },
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
+#wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+</style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
