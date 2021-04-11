@@ -1,8 +1,0 @@
-[build]
-
-  base = "packages/vue-frontend/"
-  command = "yarn build"
-  publish = "dist/"
-
-[context.production]
-    environment = { API_URL = "'https://refuel-app--api-prod.herokuapp.com/api/'" }
