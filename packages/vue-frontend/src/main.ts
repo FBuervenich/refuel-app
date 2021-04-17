@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, Plugin } from 'vue';
 import App from './App.vue';
 import store from './store';
 import router from './router';
@@ -38,7 +38,7 @@ function callbackRedirect(appState: any) {
   router.push(appState && appState.targetUrl ? appState.targetUrl : '/');
 }
 
-setupAuth(authConfig, callbackRedirect).then(async (auth: any) => {
+setupAuth(authConfig, callbackRedirect).then(async (auth: Plugin) => {
   app.use(auth);
   app.mount('#app');
 
