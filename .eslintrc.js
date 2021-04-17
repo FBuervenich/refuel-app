@@ -13,7 +13,6 @@ module.exports = {
 
     'comma-spacing': ['error', { before: false, after: true }],
     indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error'],
     quotes: ['error', 'single', { avoidEscape: true }],
     semi: ['error', 'always'],
   },
