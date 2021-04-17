@@ -1,3 +1,3 @@
 module.exports = {
-  // projects: ["/vue-frontend"],
+  projects: ['packages/vue-frontend'],
 };
