@@ -5,23 +5,24 @@ import CallbackPage from '@/views/Callback.vue';
 import ErrorPage from '@/views/Error.vue';
 // @ts-ignore
 import { routeGuard } from '@/auth';
+import { ROUTE_NAMES } from './routenames';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: ROUTE_NAMES.HOME,
     component: Home,
     beforeEnter: routeGuard,
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: ROUTE_NAMES.DASHBOARD,
     component: Dashboard,
     beforeEnter: routeGuard,
   },
   {
     path: '/about',
-    name: 'About',
+    name: ROUTE_NAMES.ABOUT,
     beforeEnter: routeGuard,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -32,12 +33,12 @@ const routes = [
 
   {
     path: '/callback',
-    name: 'Callback',
+    name: ROUTE_NAMES.CALLBACK,
     component: CallbackPage,
   },
   {
     path: '/error',
-    name: 'Error',
+    name: ROUTE_NAMES.ERROR,
     component: ErrorPage,
   },
 ];

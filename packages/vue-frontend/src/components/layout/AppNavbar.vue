@@ -6,11 +6,13 @@
       mode="horizontal"
       :router="true"
     >
-      <el-menu-item :route="{ name: 'Home' }" index="Home">Home</el-menu-item>
-      <el-menu-item :route="{ name: 'Dashboard' }" index="Dashboard"
+      <el-menu-item :route="{ name: ROUTENAMES.HOME }" index="Home"
+        >Home</el-menu-item
+      >
+      <el-menu-item :route="{ name: ROUTENAMES.DASHBOARD }" index="Dashboard"
         >Dashboard</el-menu-item
       >
-      <el-menu-item :route="{ name: 'About' }" index="About"
+      <el-menu-item :route="{ name: ROUTENAMES.ABOUT }" index="About"
         >About</el-menu-item
       >
       <el-menu-item index="Github">
@@ -19,25 +21,37 @@
           href="https://github.com/FBuervenich/basic-refuel-app/"
           target="_blank"
           >Github</a
-        ></el-menu-item
-      >
+        >
+      </el-menu-item>
+      <el-menu-item id="logout-button" index="Logout" @click="logout">
+        <font-awesome-icon class="mr-2" :icon="['fa', 'sign-out-alt']" />
+        Logout
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+// eslint-disable-next-line
+import { ROUTE_NAMES } from '@/router/routenames';
 
 export default defineComponent({
   data() {
-    return {};
+    return {
+      ROUTENAMES: ROUTE_NAMES,
+    };
   },
   computed: {
     currentRoute(): string {
       return this.$route.name as string;
     },
   },
-  methods: {},
+  methods: {
+    logout() {
+      // this.$auth.logout();
+    },
+  },
 });
 </script>
 
@@ -57,5 +71,10 @@ export default defineComponent({
 
 .mr-2 {
   margin-right: 2px;
+}
+
+#logout-button {
+  position: absolute;
+  right: 0;
 }
 </style>
