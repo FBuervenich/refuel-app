@@ -56,7 +56,7 @@ export default defineComponent({
   methods: {
     userLogout() {
       this.Auth.logout({
-        returnTo: window.location.origin + process.env.VUE_APP_PUBLIC_PATH,
+        returnTo: window.location.origin + VUE_APP_PUBLIC_PATH,
       });
     },
   },
