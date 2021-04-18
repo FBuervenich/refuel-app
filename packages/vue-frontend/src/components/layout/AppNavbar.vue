@@ -55,8 +55,9 @@ export default defineComponent({
   },
   methods: {
     userLogout() {
-      this.Auth.logout({ returnTo: window.location.origin + APP_PUBLIC_PATH });
-      this.$router.push({ path: '/' });
+      this.Auth.logout({
+        returnTo: window.location.origin + process.env.VUE_APP_PUBLIC_PATH,
+      });
     },
   },
   setup() {

@@ -21,7 +21,6 @@ module.exports = {
       ...config.plugins,
       new webpack.DefinePlugin({
         VUE_APP_API_URL: process.env.API_URL,
-        APP_PUBLIC_PATH: publicPath,
       }),
     ];
   },
@@ -33,3 +32,5 @@ module.exports = {
     });
   },
 };
+
+process.env.VUE_APP_PUBLIC_PATH = publicPath;
