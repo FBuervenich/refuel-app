@@ -140,7 +140,6 @@ export default defineComponent({
      * amount of litres
      */
     function calcTotalPrice() {
-      console.log('calcing');
       const data = formData.value;
       data.totalPrice = (data.pricePerLitre || 0) * (data.litres || 0);
       data.totalPrice = Math.round(data.totalPrice * 100) / 100;

@@ -17,6 +17,7 @@
     "axios": "^0.21.0",
     "core-js": "^3.10.1",
     "element-plus": "^1.0.2-beta.39",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "vue": "^3.0.0",
     "vue-loading-skeleton": "^1.1.9",

@@ -30,7 +30,6 @@ const app = createApp(App);
 async function init() {
   const AuthPlugin = await Auth0.init({
     onRedirectCallback: appState => {
-      console.log(appState);
       router.push(
         appState && appState.targetUrl
           ? appState.targetUrl

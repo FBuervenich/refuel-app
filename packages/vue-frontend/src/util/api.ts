@@ -1,21 +1,32 @@
 import app from '@/main';
 import axios, { AxiosRequestConfig } from 'axios';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 
 const API_BASE_URL =
   process.env.NODE_ENV === 'production' ? VUE_APP_API_URL : '/api';
+const TOKEN_LOCALSTORAGE = 'accessToken';
 
-function getAccessToken() {
-  const TOKEN_LOCALSTORAGE = 'accessToken';
+async function getAccessToken() {
   let accessToken = localStorage.getItem(TOKEN_LOCALSTORAGE);
-  if (accessToken === null) {
-    app.config.globalProperties.$auth
-      .getTokenSilently()
-      .then((token: string) => {
-        localStorage.setItem(TOKEN_LOCALSTORAGE, token);
-        accessToken = token;
-      });
+  let decodedToken: JwtPayload | undefined;
+
+  try {
+    decodedToken = jwt_decode<JwtPayload>(accessToken ?? '');
+  } catch (e) {
+    console.info('missing/errornous jwt token');
   }
-  console.log('token', accessToken);
+
+  if (
+    !decodedToken ||
+    !decodedToken.exp ||
+    decodedToken.exp <= new Date().getTime() / 1000
+  ) {
+    const auth = app._context.provides['Auth'];
+    await auth.getTokenSilently().then((token: string) => {
+      localStorage.setItem(TOKEN_LOCALSTORAGE, token);
+      accessToken = token;
+    });
+  }
   return accessToken;
 }
 
@@ -27,8 +38,8 @@ const api = axios.create({
   },
 });
 
-api.interceptors.request.use((config: AxiosRequestConfig) => {
-  const token = getAccessToken();
+api.interceptors.request.use(async (config: AxiosRequestConfig) => {
+  const token = await getAccessToken();
   config.headers['Authorization'] = `Bearer ${token}`;
 
   return config;

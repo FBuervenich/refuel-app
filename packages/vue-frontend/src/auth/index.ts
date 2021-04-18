@@ -148,12 +148,10 @@ async function init(options: Auth0PluginOptions): Promise<Plugin> {
     ) {
       // handle the redirect and retrieve tokens
       const { appState } = await client.handleRedirectCallback();
-      console.log(appState);
 
       // Notify subscribers that the redirect callback has happened, passing the appState
       // (useful for retrieving any pre-authentication state)
       options.onRedirectCallback(appState);
-      console.log(appState);
     }
   } catch (e) {
     state.error = e;
