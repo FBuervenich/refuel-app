@@ -1,0 +1,30 @@
+/*
+* Color scheme
+*/
+
+$color-primary: #00a9a5;
+$color-accent: #001427;
+
+$color-success: green;
+$color-info: yellow;
+
+$color-warning: #ff6f59;
+$color-error: #650d1b;
+
+$color-background: #fbfaf8;
+$color-border: #e0e0e0;
+
+$color-white: #ffffff;
+
+/*
+* Element-UI override
+*/
+$--color-primary: $color-primary;
+$--color-white: $color-white;
+
+$--color-success: $color-success;
+
+/*
+* Element-UI imports (icon font path, required) */
+$--font-path: '~element-plus/lib/theme-chalk/fonts';
+@import '~element-plus/packages/theme-chalk/src/index';

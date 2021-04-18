@@ -11,9 +11,9 @@ import { Auth0 } from './auth';
 
 // element plus UI Library (https://github.com/element-plus/element-plus)
 import ElementPlus from 'element-plus';
-import 'element-plus/lib/theme-chalk/index.css';
 
 // global styles
+import '@/assets/styles/theme.scss';
 import '@/assets/styles/main.scss';
 
 // font awesome (https://github.com/FortAwesome/vue-fontawesome)
