@@ -30,7 +30,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
-
   {
     path: '/callback',
     name: ROUTE_NAMES.CALLBACK,

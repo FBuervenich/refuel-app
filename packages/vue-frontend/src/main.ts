@@ -1,13 +1,13 @@
-import { createApp, Plugin } from 'vue';
-import App from './App.vue';
+import { createApp } from 'vue';
 import store from './store';
 import router from './router';
+import App from '@/App.vue';
 
 import api from '@/util/api';
 
 const authConfig = require('../auth_config.json');
 // @ts-ignore
-import { setupAuth } from './auth';
+import { Auth0 } from './auth';
 
 // element plus UI Library (https://github.com/element-plus/element-plus)
 import ElementPlus from 'element-plus';
@@ -27,22 +27,36 @@ library.add(fas, fab, far);
 
 const app = createApp(App);
 
-app.component('font-awesome-icon', FontAwesomeIcon);
+async function init() {
+  const AuthPlugin = await Auth0.init({
+    onRedirectCallback: appState => {
+      console.log(appState);
+      router.push(
+        appState && appState.targetUrl
+          ? appState.targetUrl
+          : window.location.pathname
+      );
+    },
+    // clientId: process.env.VUE_APP_AUTH0_CLIENT_KEY,
+    // domain: process.env.VUE_APP_AUTH0_DOMAIN,
+    // audience: process.env.VUE_APP_AUTH0_AUDIENCE,
+    clientId: authConfig.client_id,
+    domain: authConfig.domain,
+    audience: authConfig.audience,
+    redirectUri: window.location.origin,
+  });
 
-app
-  .use(router)
-  .use(store)
-  .use(ElementPlus);
+  app.component('font-awesome-icon', FontAwesomeIcon);
 
-function callbackRedirect(appState: any) {
-  router.push(appState && appState.targetUrl ? appState.targetUrl : '/');
+  app
+    .use(router)
+    .use(store)
+    .use(ElementPlus)
+    .use(AuthPlugin);
+
+  app.mount('#app');
+  app.provide('api', api);
 }
 
-setupAuth(authConfig, callbackRedirect).then(async (auth: Plugin) => {
-  app.use(auth);
-  app.mount('#app');
-
-  app.provide('api', api);
-});
-
+init();
 export default app;

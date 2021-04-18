@@ -2,21 +2,22 @@ import createAuth0Client, {
   Auth0Client,
   LogoutOptions,
   RedirectLoginOptions,
+  User,
 } from '@auth0/auth0-spa-js';
-import { App, computed, reactive, watchEffect } from 'vue';
-import { RouteLocation } from 'vue-router';
+import { App, computed, reactive, watchEffect, Plugin } from 'vue';
+import { NavigationGuardWithThis, RouteLocation } from 'vue-router';
 
-export interface AppState {
+interface Auth0PluginState {
   loading: boolean;
   isAuthenticated: boolean;
-  user: object;
+  user: User | undefined;
   popupOpen: boolean;
   error: any | null;
 }
 
 let client: Auth0Client;
 
-const state: AppState = reactive({
+const state = reactive<Auth0PluginState>({
   loading: true,
   isAuthenticated: false,
   user: {},
@@ -35,7 +36,7 @@ async function loginWithPopup() {
     state.popupOpen = false;
   }
 
-  state.user = (await client.getUser()) ?? {};
+  state.user = await client.getUser();
   state.isAuthenticated = true;
 }
 
@@ -44,7 +45,7 @@ async function handleRedirectCallback() {
 
   try {
     await client.handleRedirectCallback();
-    state.user = (await client.getUser()) ?? {};
+    state.user = await client.getUser();
     state.isAuthenticated = true;
   } catch (e) {
     state.error = e;
@@ -86,7 +87,7 @@ const authPlugin = {
   logout,
 };
 
-export const routeGuard = (
+export const routeGuard: NavigationGuardWithThis<undefined> = (
   to: RouteLocation,
   from: RouteLocation,
   next: Function
@@ -120,12 +121,23 @@ export const routeGuard = (
   });
 };
 
-export const setupAuth = async (
-  options: any,
-  callbackRedirect: (appState: any) => void
-) => {
+interface Auth0PluginOptions {
+  domain: string;
+  clientId: string;
+  audience: string;
+  redirectUri: string;
+
+  onRedirectCallback(appState: any): void;
+}
+
+async function init(options: Auth0PluginOptions): Promise<Plugin> {
   client = await createAuth0Client({
-    ...options,
+    // domain: process.env.VUE_APP_AUTH0_DOMAIN,
+    // client_id: process.env.VUE_APP_AUTH0_CLIENT_KEY,
+    domain: options.domain,
+    client_id: options.clientId,
+    audience: options.audience,
+    redirect_uri: options.redirectUri,
   });
 
   try {
@@ -136,23 +148,35 @@ export const setupAuth = async (
     ) {
       // handle the redirect and retrieve tokens
       const { appState } = await client.handleRedirectCallback();
+      console.log(appState);
 
       // Notify subscribers that the redirect callback has happened, passing the appState
       // (useful for retrieving any pre-authentication state)
-      callbackRedirect(appState);
+      options.onRedirectCallback(appState);
+      console.log(appState);
     }
   } catch (e) {
     state.error = e;
   } finally {
     // Initialize our internal authentication state
     state.isAuthenticated = await client.isAuthenticated();
-    state.user = (await client.getUser()) ?? {};
+    state.user = await client.getUser();
     state.loading = false;
   }
 
   return {
     install: (app: App) => {
-      app.config.globalProperties.$auth = authPlugin;
+      app.provide('Auth', authPlugin);
     },
   };
+}
+
+interface Auth0Plugin {
+  init(options: Auth0PluginOptions): Promise<Plugin>;
+  routeGuard: NavigationGuardWithThis<undefined>;
+}
+
+export const Auth0: Auth0Plugin = {
+  init,
+  routeGuard,
 };

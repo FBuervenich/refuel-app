@@ -6,13 +6,17 @@
       mode="horizontal"
       :router="true"
     >
-      <el-menu-item :route="{ name: ROUTENAMES.HOME }" index="Home"
+      <el-menu-item :route="{ name: ROUTENAMES.HOME }" :index="ROUTENAMES.HOME"
         >Home</el-menu-item
       >
-      <el-menu-item :route="{ name: ROUTENAMES.DASHBOARD }" index="Dashboard"
+      <el-menu-item
+        :route="{ name: ROUTENAMES.DASHBOARD }"
+        :index="ROUTENAMES.DASHBOARD"
         >Dashboard</el-menu-item
       >
-      <el-menu-item :route="{ name: ROUTENAMES.ABOUT }" index="About"
+      <el-menu-item
+        :route="{ name: ROUTENAMES.ABOUT }"
+        :index="ROUTENAMES.ABOUT"
         >About</el-menu-item
       >
       <el-menu-item index="Github">
@@ -23,7 +27,7 @@
           >Github</a
         >
       </el-menu-item>
-      <el-menu-item id="logout-button" index="Logout" @click="logout">
+      <el-menu-item id="logout-button" index="Logout" @click="userLogout">
         <font-awesome-icon class="mr-2" :icon="['fa', 'sign-out-alt']" />
         Logout
       </el-menu-item>
@@ -32,11 +36,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 // eslint-disable-next-line
 import { ROUTE_NAMES } from '@/router/routenames';
 
 export default defineComponent({
+  name: 'AppNavbar',
+  inject: ['Auth'],
   data() {
     return {
       ROUTENAMES: ROUTE_NAMES,
@@ -48,9 +54,16 @@ export default defineComponent({
     },
   },
   methods: {
-    logout() {
-      // this.$auth.logout();
+    userLogout() {
+      this.Auth.logout({ returnTo: window.location.origin + APP_PUBLIC_PATH });
+      this.$router.push({ path: '/' });
     },
+  },
+  setup() {
+    const auth: any = inject('Auth');
+    return {
+      ...auth,
+    };
   },
 });
 </script>
