@@ -1,18 +1,18 @@
 <template>
   <div id="wrapper">
-    <h2>Dashboard</h2>
+    <h2>Refuelings</h2>
     <RefuelingsTable :refuelings="refuelings" />
   </div>
 </template>
 
 <script lang="ts">
-import RefuelingsTable from '@/components/RefuelingsTable.vue';
+import RefuelingsTable from '@/components/widgets/RefuelingsTable.vue';
 
 import { computed, defineComponent } from 'vue';
 import { RefuelingsModule } from '@/store';
 
 export default defineComponent({
-  name: 'Dashboard',
+  name: 'Refuelings',
   components: {
     RefuelingsTable,
   },

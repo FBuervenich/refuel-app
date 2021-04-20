@@ -26,7 +26,7 @@ import { defineComponent } from 'vue';
 
 import AppNavbar from '@/components/layout/AppNavbar.vue';
 import AppFooter from '@/components/layout/AppFooter.vue';
-import BaseLoadingAnimation from '@/components/BaseLoadingAnimation.vue';
+import BaseLoadingAnimation from '@/components/base/BaseLoadingAnimation.vue';
 
 export default defineComponent({
   setup() {

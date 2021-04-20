@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <CreateNewRefueling
+    <CreateNewRefuelingCard
       class="newRefuelingCard"
       :lastTotalKilometers="125683"
     />
@@ -9,12 +9,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CreateNewRefueling from '@/components/CreateNewRefueling.vue';
+import CreateNewRefuelingCard from '@/components/widgets/CreateNewRefuelingCard.vue';
 
 export default defineComponent({
   name: 'Home',
   components: {
-    CreateNewRefueling,
+    CreateNewRefuelingCard,
   },
   setup() {
     return {};
