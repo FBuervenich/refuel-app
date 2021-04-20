@@ -3,20 +3,20 @@
     <AppNavbar />
     <div class="content">
       <router-view v-slot="{ Component }">
-        <Suspense>
-          <template #default>
-            <component :is="Component" />
-          </template>
-          <template #fallback>
-            <BaseLoadingAnimation />
-          </template>
-        </Suspense>
+        <transition name="fade">
+          <Suspense timeout="0">
+            <template #default>
+              <component :is="Component" />
+            </template>
+            <template #fallback>
+              <BaseLoadingAnimation />
+            </template>
+          </Suspense>
+        </transition>
       </router-view>
     </div>
     <footer class="footer">
-      <div id="footer">
-        <AppFooter />
-      </div>
+      <AppFooter />
     </footer>
   </div>
 </template>

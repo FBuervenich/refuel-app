@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import Dashboard from '@/views/Dashboard.vue';
+import Refuelings from '@/views/Refuelings.vue';
 import CallbackPage from '@/views/Callback.vue';
 import ErrorPage from '@/views/Error.vue';
 // @ts-ignore
@@ -21,9 +22,14 @@ const routes = [
     beforeEnter: routeGuard,
   },
   {
+    path: '/refuelings',
+    name: ROUTE_NAMES.REFUELINGS,
+    component: Refuelings,
+    beforeEnter: routeGuard,
+  },
+  {
     path: '/about',
     name: ROUTE_NAMES.ABOUT,
-    beforeEnter: routeGuard,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

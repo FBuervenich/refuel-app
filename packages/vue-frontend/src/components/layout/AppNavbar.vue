@@ -6,27 +6,24 @@
       mode="horizontal"
       :router="true"
     >
-      <el-menu-item :route="{ name: ROUTENAMES.HOME }" :index="ROUTENAMES.HOME"
-        >Home</el-menu-item
-      >
       <el-menu-item
         :route="{ name: ROUTENAMES.DASHBOARD }"
         :index="ROUTENAMES.DASHBOARD"
         >Dashboard</el-menu-item
+      >
+      <el-menu-item :route="{ name: ROUTENAMES.HOME }" :index="ROUTENAMES.HOME"
+        >Home</el-menu-item
+      >
+      <el-menu-item
+        :route="{ name: ROUTENAMES.REFUELINGS }"
+        :index="ROUTENAMES.REFUELINGS"
+        >Refuelings</el-menu-item
       >
       <el-menu-item
         :route="{ name: ROUTENAMES.ABOUT }"
         :index="ROUTENAMES.ABOUT"
         >About</el-menu-item
       >
-      <el-menu-item index="Github">
-        <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
-        <a
-          href="https://github.com/FBuervenich/basic-refuel-app/"
-          target="_blank"
-          >Github</a
-        >
-      </el-menu-item>
       <el-menu-item id="logout-button" index="Logout" @click="userLogout">
         <font-awesome-icon class="mr-2" :icon="['fa', 'sign-out-alt']" />
         Logout
@@ -81,10 +78,6 @@ export default defineComponent({
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-
-.mr-2 {
-  margin-right: 2px;
 }
 
 #logout-button {

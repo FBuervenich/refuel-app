@@ -1,6 +1,7 @@
 //*********//
 // GLOBALS //
 //*********//
+declare const VUE_APP_NAME: string;
 
 declare const VUE_APP_API_URL: string;
 declare const VUE_APP_PUBLIC_PATH: string;

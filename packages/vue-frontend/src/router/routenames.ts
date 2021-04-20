@@ -1,6 +1,7 @@
 export enum ROUTE_NAMES {
   // VIEWS
   HOME = 'home',
+  REFUELINGS = 'refuelings',
   DASHBOARD = 'dashboard',
   ABOUT = 'about',
 

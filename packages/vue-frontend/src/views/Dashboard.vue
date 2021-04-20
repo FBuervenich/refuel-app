@@ -1,34 +1,18 @@
 <template>
   <div id="wrapper">
     <h2>Dashboard</h2>
-    <RefuelingsTable :refuelings="refuelings" />
   </div>
 </template>
 
 <script lang="ts">
-import RefuelingsTable from '@/components/RefuelingsTable.vue';
-
-import { computed, defineComponent } from 'vue';
-import { RefuelingsModule } from '@/store';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Dashboard',
-  components: {
-    RefuelingsTable,
-  },
+  components: {},
 
   async setup() {
-    const refuelings = computed(() => RefuelingsModule.refuelings);
-    await loadData();
-
-    return {
-      loadData,
-      refuelings,
-    };
-
-    function loadData() {
-      return RefuelingsModule.fetchAll();
-    }
+    return {};
   },
 });
 </script>

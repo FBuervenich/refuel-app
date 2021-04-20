@@ -59,7 +59,7 @@ async function init() {
 
 function logAppInfo() {
   console.log(
-    `%c ⛽ Refuel app ️%c\n Bulid based on commit %c${VUE_APP_COMMIT_HASH}%c from: %c${new Date(
+    `%c ⛽ ${VUE_APP_NAME} ️%c\n Bulid based on commit %c${VUE_APP_COMMIT_HASH}%c from: %c${new Date(
       VUE_APP_BUILD_TIMESTAMP
     ).toLocaleString()}\n`,
     'font-size: 30px; font-family: Calibri;font-weight: bold; padding: 10px 0;',

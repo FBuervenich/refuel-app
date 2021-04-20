@@ -2,6 +2,8 @@ const webpack = require('webpack'); //to access built-in plugins
 const { gitDescribeSync } = require('git-describe');
 const package = require('./package.json');
 
+const APP_NAME = 'Refuel app';
+
 const isProdEnv = process.env.NODE_ENV === 'production';
 const isDevEnv = process.env.NODE_ENV === 'development';
 const publicPath = isProdEnv ? '/' : '/vuewebapp/';
@@ -24,6 +26,8 @@ module.exports = {
     config.plugins = [
       ...config.plugins,
       new webpack.DefinePlugin({
+        VUE_APP_NAME: JSON.stringify(APP_NAME),
+
         VUE_APP_API_URL: process.env.API_URL,
         VUE_APP_PUBLIC_PATH: JSON.stringify(publicPath),
 
@@ -40,16 +44,8 @@ module.exports = {
 
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = 'Refuel app';
+      args[0].title = APP_NAME;
       return args;
     });
   },
 };
-
-// process.env.VUE_APP_PUBLIC_PATH = publicPath;
-// process.env.VUE_APP_VERSION = package.version;
-
-// process.env.VUE_APP_COMMIT_HASH = gitDescribeSync().hash;
-// process.env.VUE_APP_COMMIT_TAG = gitDescribeSync().tag;
-
-// process.env.VUE_APP_BUILD_TIMESTAMP = new Date().toISOString();

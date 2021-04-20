@@ -6,7 +6,7 @@ import {
   Action,
   MutationAction,
 } from 'vuex-module-decorators';
-import { Refueling } from '../models';
+import { Refueling } from '../../models';
 
 @Module({ name: 'refueling' })
 export default class Refuelings extends VuexModule {

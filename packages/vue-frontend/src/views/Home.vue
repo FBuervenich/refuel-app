@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <CreateNewRefueling id="newRefuelingCard" :lastTotalKilometers="125683" />
+    <CreateNewRefueling
+      class="newRefuelingCard"
+      :lastTotalKilometers="125683"
+    />
   </div>
 </template>
 
@@ -20,7 +23,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#newRefuelingCard {
+.newRefuelingCard {
   width: 80%;
   margin: auto;
   margin-top: 10px;

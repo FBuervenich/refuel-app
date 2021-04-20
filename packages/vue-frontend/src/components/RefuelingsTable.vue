@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="beautifiedRefuelings" stripe height="750">
+  <el-table :data="beautifiedRefuelings" stripe>
     <el-table-column prop="id" label="id"> </el-table-column>
     <el-table-column prop="madeAt" label="Datum"> </el-table-column>
     <el-table-column prop="litres" label="Litres"> </el-table-column>
