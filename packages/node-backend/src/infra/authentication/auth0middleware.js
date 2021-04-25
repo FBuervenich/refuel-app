@@ -13,4 +13,10 @@ const jwtCheck = jwt({
   algorithms: ['RS256'],
 });
 
-module.exports = jwtCheck;
+const userIdExtractor = (req, res, next) => {
+  const userId = req.user.sub;
+  res.locals.userId = userId;
+  next();
+};
+
+module.exports = [jwtCheck, userIdExtractor];

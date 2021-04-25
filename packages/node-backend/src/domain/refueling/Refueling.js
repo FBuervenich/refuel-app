@@ -31,6 +31,10 @@ const Refueling = attributes({
     type: Date,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
 })(
   class Refueling {
     /**

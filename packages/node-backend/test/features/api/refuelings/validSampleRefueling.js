@@ -5,6 +5,7 @@ const VALID_SAMPLE_REFUELING = {
   totalKilometers: 20000,
   dayKilometers: 500,
   fullTank: true,
+  userId: 'NONE',
 };
 
 module.exports = VALID_SAMPLE_REFUELING;

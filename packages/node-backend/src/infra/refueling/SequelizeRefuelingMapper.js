@@ -11,6 +11,7 @@ const SequelizeRefuelingMapper = {
       dayKilometers,
       fullTank,
       madeAt,
+      userId,
     } = dbSurvivor.get({ plain: true });
 
     return new Refueling({
@@ -22,6 +23,7 @@ const SequelizeRefuelingMapper = {
       dayKilometers,
       fullTank,
       madeAt,
+      userId,
     });
   },
 
@@ -34,6 +36,7 @@ const SequelizeRefuelingMapper = {
       dayKilometers,
       fullTank,
       madeAt,
+      userId,
     } = survivor;
 
     return {
@@ -44,6 +47,7 @@ const SequelizeRefuelingMapper = {
       dayKilometers,
       fullTank,
       madeAt,
+      userId,
     };
   },
 };

@@ -27,7 +27,8 @@ const RefuelingsController = {
         })
         .on(ERROR, next);
 
-      getAllRefuelings.execute();
+      const userId = res.locals.userId;
+      getAllRefuelings.execute(userId);
     }
   ),
 
@@ -46,7 +47,8 @@ const RefuelingsController = {
       })
       .on(ERROR, next);
 
-    getRefueling.execute(Number(req.params.id));
+    const userId = res.locals.userId;
+    getRefueling.execute(Number(req.params.id), userId);
   }),
 
   create: inject(
@@ -67,7 +69,8 @@ const RefuelingsController = {
         })
         .on(ERROR, next);
 
-      createRefueling.execute(req.body);
+      const userId = res.locals.userId;
+      createRefueling.execute(req.body, userId);
     }
   ),
 

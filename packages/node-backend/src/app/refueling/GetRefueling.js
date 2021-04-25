@@ -6,21 +6,35 @@ class GetRefueling extends Operation {
     this.refuelingsRepository = refuelingsRepository;
   }
 
-  async execute(refuelingId) {
+  /**
+   *
+   * @param {number} refuelingId
+   * @param {string | undefined} userId
+   */
+  async execute(refuelingId, userId) {
     const { SUCCESS, NOT_FOUND } = this.outputs;
 
+    let refueling;
     try {
-      const refueling = await this.refuelingsRepository.getById(refuelingId);
-      this.emit(SUCCESS, refueling);
+      refueling = await this.refuelingsRepository.getById(refuelingId);
     } catch (error) {
       this.emit(NOT_FOUND, {
         type: error.message,
         details: error.details,
       });
     }
+
+    if (refueling.userId !== userId) {
+      this.emit(FORBIDDEN, {
+        type: 'FORBIDDEN',
+        details: `NOT ALLOWED TO FETCH REFUELING WITH ID ${refuelingId}`,
+      });
+    } else {
+      this.emmit(SUCCESS, refueling);
+    }
   }
 }
 
-GetRefueling.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND']);
+GetRefueling.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND', 'FORBIDDEN']);
 
 module.exports = GetRefueling;

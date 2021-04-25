@@ -8,6 +8,7 @@ const RefuelingSerializer = {
     dayKilometers,
     fullTank,
     madeAt,
+    userId,
   }) {
     return {
       id,
@@ -18,6 +19,7 @@ const RefuelingSerializer = {
       dayKilometers,
       fullTank,
       madeAt,
+      userId,
     };
   },
 };

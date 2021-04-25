@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (Sequelize, sequelize, DataTypes) {
+module.exports = function(Sequelize, sequelize, DataTypes) {
   class RefuelingModel extends Sequelize.Model {}
 
   return RefuelingModel.init(
@@ -31,6 +31,10 @@ module.exports = function (Sequelize, sequelize, DataTypes) {
       },
       madeAt: {
         type: DataTypes.DATE,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

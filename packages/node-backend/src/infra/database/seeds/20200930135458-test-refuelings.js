@@ -3,7 +3,7 @@
 const random = require('random');
 
 module.exports = {
-  up: function (queryInterface) {
+  up: function(queryInterface) {
     // maximum amount of deviation from the curre
     const maxTimeDeviationFromCurrentInSeconds = 60 * 60 * 24 * 365; // 1 year max. deviation
     const currentDate = new Date();
@@ -22,6 +22,8 @@ module.exports = {
       let madeAt = new Date(currentDate);
       madeAt.setSeconds(madeAt.getSeconds() - timeDeviation);
 
+      const userId = 'NONE';
+
       testRefuelings.push({
         litres,
         price,
@@ -32,13 +34,14 @@ module.exports = {
         madeAt,
         createdAt: currentDate,
         updatedAt: currentDate,
+        userId,
       });
     }
 
     return queryInterface.bulkInsert('refuelings', testRefuelings, {});
   },
 
-  down: function (queryInterface) {
+  down: function(queryInterface) {
     return queryInterface.bulkDelete('refuelings', null, {});
   },
 };

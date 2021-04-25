@@ -7,10 +7,10 @@ class CreateRefueling extends Operation {
     this.refuelingsRepository = refuelingsRepository;
   }
 
-  async execute(refuelingData) {
+  async execute(refuelingData, userId) {
     const { SUCCESS, ERROR, VALIDATION_ERROR } = this.outputs;
 
-    const refueling = new Refueling(refuelingData);
+    const refueling = new Refueling({ ...refuelingData, userId });
 
     try {
       const newRefueling = await this.refuelingsRepository.add(refueling);

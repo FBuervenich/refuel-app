@@ -6,22 +6,33 @@ class GetAllRefuelings extends Operation {
     this.refuelingsRepository = refuelingsRepository;
   }
 
-  async execute() {
+  /**
+   *
+   * @param {string | undefined} userId
+   */
+  async execute(userId) {
     const { SUCCESS, ERROR } = this.outputs;
 
+    const args = {
+      attributes: [
+        'id',
+        'litres',
+        'price',
+        'pricePerLitre',
+        'totalKilometers',
+        'dayKilometers',
+        'fullTank',
+        'madeAt',
+        'userId',
+      ],
+    };
+    if (userId) {
+      args.where = {
+        userId,
+      };
+    }
     try {
-      const refuelings = await this.refuelingsRepository.getAll({
-        attributes: [
-          'id',
-          'litres',
-          'price',
-          'pricePerLitre',
-          'totalKilometers',
-          'dayKilometers',
-          'fullTank',
-          'madeAt',
-        ],
-      });
+      const refuelings = await this.refuelingsRepository.getAll(args);
 
       this.emit(SUCCESS, refuelings);
     } catch (error) {
