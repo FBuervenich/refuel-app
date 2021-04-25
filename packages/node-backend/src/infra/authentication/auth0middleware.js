@@ -11,6 +11,7 @@ const jwtCheck = jwt({
   audience: 'https://refuel-app--api-prod.herokuapp.com/api',
   issuer: 'https://fbuervenich.eu.auth0.com/',
   algorithms: ['RS256'],
+  resultProperty: 'locals.user',
 });
 
 module.exports = jwtCheck;
