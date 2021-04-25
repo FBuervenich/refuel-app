@@ -14,8 +14,7 @@ const jwtCheck = jwt({
 });
 
 const userIdExtractor = (req, res, next) => {
-  const userId = req.user.sub;
-  res.locals.userId = userId;
+  res.locals.userId = req.user.sub;
   next();
 };
 

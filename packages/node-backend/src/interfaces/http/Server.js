@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 class Server {
   constructor({ config, router, logger, authenticationMiddleWare }) {
@@ -7,7 +8,9 @@ class Server {
     this.express = express();
 
     this.express.disable('x-powered-by');
+    this.express.use(cors());
     this.express.use(...authenticationMiddleWare);
+
     this.express.use(router);
   }
 
