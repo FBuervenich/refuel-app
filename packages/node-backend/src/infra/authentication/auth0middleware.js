@@ -11,7 +11,11 @@ const jwtCheck = jwt({
   audience: 'https://refuel-app--api-prod.herokuapp.com/api',
   issuer: 'https://fbuervenich.eu.auth0.com/',
   algorithms: ['RS256'],
-  resultProperty: 'locals.user',
 });
 
-module.exports = jwtCheck;
+const userIdExtractor = (req, res, next) => {
+  res.locals.userId = req.user.sub;
+  next();
+};
+
+module.exports = [jwtCheck, userIdExtractor];

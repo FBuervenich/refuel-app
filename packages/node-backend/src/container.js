@@ -31,7 +31,6 @@ const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware')
 
 const logger = require('./infra/logging/logger');
 const auth0Middleware = require('./infra/authentication/auth0middleware');
-const auth0UserIdExtractionMiddleware = require('./infra/authentication/auth0UserIdExtractionMiddleware');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
 const {
@@ -63,9 +62,6 @@ container
   })
   .register({
     authenticationMiddleWare: asValue(auth0Middleware),
-  })
-  .register({
-    userExtractionMiddleware: asValue(auth0UserIdExtractionMiddleware),
   })
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),

@@ -1,23 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const userIdExtractor = require('../../infra/authentication/auth0UserIdExtractionMiddleware');
 
 class Server {
-  constructor({
-    config,
-    router,
-    logger,
-    authenticationMiddleWare,
-    userExtractionMiddleware,
-  }) {
+  constructor({ config, router, logger, authenticationMiddleWare }) {
     this.config = config;
     this.logger = logger;
     this.express = express();
 
     this.express.disable('x-powered-by');
     this.express.use(cors());
-    this.express.use(authenticationMiddleWare);
-    this.express.use(userExtractionMiddleware);
+    this.express.use(...authenticationMiddleWare);
 
     this.express.use(router);
   }
