@@ -5,9 +5,9 @@ Node API based on [this boilerplate](https://github.com/talyssonoc/node-api-boil
 ## Quick start
 
 1. Clone the repository with `git clone --depth=1 https://github.com/talyssonoc/node-api-boilerplate`
-2. Setup the database on `config/database.js` (there's an example file there to be used with PostgreSQL 😉 )
+2. Setup the database on `config/database.ts` (there's an example file there to be used with PostgreSQL 😉 )
 3. Install the dependencies with `yarn` (click here if [you don't have Yarn installed](https://yarnpkg.com/docs/install))
-4. Create the development and test databases you have setup on `config/database.js`
+4. Create the development and test databases you have setup on `config/database.ts`
 5. Run the database migrations with `npm run sequelize db:migrate`
 6. Add some seed data to the development database with `npm run sequelize db:seed:all`
 7. Run the application in development mode with `npm run dev`

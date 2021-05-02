@@ -5,7 +5,8 @@
 
     "outDir": "dist",
     "allowJs": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.js", "index.js"]
 }

@@ -5,7 +5,10 @@
 node_modules/
 
 # Project specific
-config/database.js
+config/database.ts
+
+# Typescript output
+dist/
 
 # Unit test / coverage reports
 coverage/
