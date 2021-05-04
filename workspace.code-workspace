@@ -6,7 +6,9 @@
     { "name": "backend", "path": "packages/node-backend" }
   ],
   "settings": {
-    "eslint.workingDirectories": [{ "mode": "auto" }]
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "launch": {
     // Use IntelliSense to learn about possible attributes.
