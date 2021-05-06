@@ -1,6 +1,8 @@
+import { Sequelize, DataTypes, Options } from 'sequelize';
 const { ModelsLoader } = require('src/infra/sequelize');
-const { Sequelize, DataTypes } = require('sequelize');
-const { db: config } = require('config');
+import appConfig from '../../../../config';
+
+const config = appConfig.db as Options;
 
 if (config) {
   const sequelize = new Sequelize(config);

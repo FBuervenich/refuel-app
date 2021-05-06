@@ -1,7 +1,8 @@
-const path = require('path');
+import * as path from 'path';
+import { EnvironmentConfig } from '../';
 const logPath = path.join(__dirname, '../../../logs/development.log');
 
-module.exports = {
+const config: EnvironmentConfig = {
   web: {
     port: 3000,
   },
@@ -18,3 +19,5 @@ module.exports = {
     },
   },
 };
+
+module.exports = config;
