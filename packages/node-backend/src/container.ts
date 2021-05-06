@@ -1,7 +1,8 @@
-const { createContainer, asClass, asFunction, asValue } = require('awilix');
-const { scopePerRequest } = require('awilix-express');
+import { createContainer, asClass, asFunction, asValue } from 'awilix';
+import { scopePerRequest } from 'awilix-express';
 
-const config = require('../config');
+import config from '../config';
+
 const Application = require('./app/Application');
 const {
   CreateUser,

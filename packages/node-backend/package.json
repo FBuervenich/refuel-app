@@ -8,20 +8,22 @@
     "node": ">=7.6.0"
   },
   "scripts": {
-    "start": "node cluster.js",
-    "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon",
-    "debug": "cross-env NODE_PATH=. NODE_ENV=development nodemon --inspect",
+    "start": "node dist/cluster.js",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"#3178c6.bold,#68a063.bold\" \"npm run watch\" \"cross-env NODE_PATH=./dist NODE_ENV=development nodemon\"",
+    "debug": "npm run dev --inspect",
+    "build": "cross-env NODE_PATH=./ tsc",
     "test": "npm run test:all",
     "test:all": "npm run test:unit && npm run test:features",
-    "test:unit": "cross-env NODE_PATH=. NODE_ENV=test mocha --config test/.mocharc.unit.js",
-    "test:features": "cross-env NODE_PATH=. NODE_ENV=test mocha --config test/.mocharc.features.js",
-    "coverage": "cross-env NODE_PATH=. NODE_ENV=test nyc mocha --config test/.mocharc.unit.js",
-    "lint": "eslint {src,test,config}/**/*.js",
-    "sequelize": "cross-env NODE_PATH=. sequelize",
-    "console": "cross-env NODE_PATH=. node src/interfaces/console/index.js",
-    "heroku-postbuild": "NODE_ENV=production NODE_PATH=. sequelize db:migrate --url=$DATABASE_URL",
+    "test:unit": "cross-env NODE_PATH=./dist NODE_ENV=test mocha --config test/.mocharc.unit.js",
+    "test:features": "cross-env NODE_PATH=./dist NODE_ENV=test mocha --config test/.mocharc.features.js",
+    "coverage": "cross-env NODE_PATH=./dist NODE_ENV=test nyc mocha --config test/.mocharc.unit.js",
+    "lint": "eslint {src,test,config}/**/*.{js,ts}",
+    "sequelize": "cross-env NODE_PATH=./dist sequelize",
+    "console": "cross-env NODE_PATH=./dist node src/interfaces/console/index.js",
+    "heroku-postbuild": "npm run build && NODE_ENV=production NODE_PATH=./dist sequelize db:migrate --url=$DATABASE_URL",
     "pm2": "pm2",
-    "cleanup": "node scripts/cleanup.js"
+    "cleanup": "node scripts/cleanup.js",
+    "watch": "tsc -w"
   },
   "repository": {},
   "author": "Florentin Bürvenich",
@@ -31,11 +33,11 @@
     "awilix-express": "^4.0.0",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
+    "concurrently": "^6.0.2",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "del": "^6.0.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.13.0",
     "express": "^4.15.2",
     "express-jwt": "^6.0.0",
     "express-jwt-authz": "^2.4.1",
@@ -66,6 +68,7 @@
     "nyc": "^15.1.0",
     "replace-in-file": "^6.1.0",
     "supertest": "^6.0.1",
-    "supertest-as-promised": "^4.0.2"
+    "supertest-as-promised": "^4.0.2",
+    "typescript": "^4.2.4"
   }
 }

@@ -1,4 +1,6 @@
-module.exports = {
+import { EnvironmentConfig } from '../';
+
+const config: EnvironmentConfig = {
   web: {
     port: process.env.PORT,
   },
@@ -14,3 +16,5 @@ module.exports = {
     },
   },
 };
+
+module.exports = config;

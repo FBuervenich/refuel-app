@@ -4,8 +4,8 @@ const remove = require('del');
 const Listr = require('listr');
 const { writeFileSync } = require('fs');
 
-const srcPath = path.join(__dirname, '..', 'src');
-const testPath = path.join(__dirname, '..', 'test');
+const srcPath = path.join(__dirname, '..', 'dist/src');
+const testPath = path.join(__dirname, '..', 'dist/test');
 const srcAndTestPath = `{${testPath}/unit,${srcPath}}`;
 const routerPath = path.join(srcPath, 'interfaces', 'http', 'router.js');
 const containerPath = path.join(srcPath, 'container.js');
@@ -96,6 +96,6 @@ const tasks = new Listr([
   },
 ]);
 
-tasks.run().catch((err) => {
+tasks.run().catch(err => {
   console.error(err);
 });
