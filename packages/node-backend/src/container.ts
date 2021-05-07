@@ -1,9 +1,18 @@
-import { createContainer, asClass, asFunction, asValue } from 'awilix';
+import {
+  createContainer,
+  asClass,
+  asFunction,
+  asValue,
+  InjectionMode,
+} from 'awilix';
 import { scopePerRequest } from 'awilix-express';
+import { Router } from 'express';
+import { Logger } from 'log4js';
 
 import config from '../config';
+import { Config } from '../config';
 
-const Application = require('./app/Application');
+import Application from './app/Application';
 const {
   CreateUser,
   GetAllUsers,
@@ -23,14 +32,14 @@ const {
 const UserSerializer = require('./interfaces/http/user/UserSerializer');
 const RefuelingSerializer = require('./interfaces/http/refueling/RefuelingSerializer');
 
-const Server = require('./interfaces/http/Server');
-const router = require('./interfaces/http/router');
+import Server from './interfaces/http/Server';
+import router from './interfaces/http/router';
 const loggerMiddleware = require('./interfaces/http/logging/loggerMiddleware');
 const errorHandler = require('./interfaces/http/errors/errorHandler');
 const devErrorHandler = require('./interfaces/http/errors/devErrorHandler');
 const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware');
 
-const logger = require('./infra/logging/logger');
+import logger from './infra/logging/logger';
 const auth0Middleware = require('./infra/authentication/auth0middleware');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
@@ -40,7 +49,23 @@ const {
   RefuelingModel,
 } = require('./infra/database/models');
 
-const container = createContainer();
+interface ICradle {
+  // System
+  app: Application;
+  server: Server;
+  router: Router;
+  logger: Logger;
+  config: Config;
+
+  // Middlewares
+  // loggerMiddleware:
+}
+
+// const container = createContainer<ICradle>({
+// injectionMode: InjectionMode.CLASSIC,
+const container = createContainer({
+  injectionMode: InjectionMode.PROXY,
+});
 
 // System
 container
@@ -104,4 +129,4 @@ container.register({
   refuelingSerializer: asValue(RefuelingSerializer),
 });
 
-module.exports = container;
+export default container;

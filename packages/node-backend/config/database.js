@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: 'ydwfjych',
-    password: 'bp2UXj7qCeK5eP0L1UVgCjqOdZPcIXsy',
+    password: '5t5MCTkrwf1lMShfwWk2tnnSqHKdeHiW',
     database: 'ydwfjych',
     host: 'balarama.db.elephantsql.com',
     dialect: 'postgres',

@@ -1,7 +1,13 @@
-const express = require('express');
-const cors = require('cors');
+import express, { Express } from 'express';
+import cors from 'cors';
+import { Config } from '../../../config';
+import { Logger } from 'log4js';
 
-class Server {
+export default class Server {
+  private config: Config;
+  private logger: Logger;
+  private express: Express;
+
   constructor({ config, router, logger, authenticationMiddleWare }) {
     this.config = config;
     this.logger = logger;
@@ -15,14 +21,12 @@ class Server {
   }
 
   start() {
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       const http = this.express.listen(this.config.web.port, () => {
-        const { port } = http.address();
+        const port = http.address()['port'] ?? 3000;
         this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
         resolve();
       });
     });
   }
 }
-
-module.exports = Server;

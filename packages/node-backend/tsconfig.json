@@ -2,11 +2,14 @@
   // "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-
     "outDir": "dist",
     "allowJs": true,
     "target": "ESNext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "esModuleInterop": true
   },
-  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.js", "index.js"]
+  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.js", "index.ts"]
 }

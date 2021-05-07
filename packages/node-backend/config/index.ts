@@ -31,6 +31,7 @@ const config = Object.assign(
 );
 
 export default config;
+export type Config = typeof config;
 
 /** Loads the database config - either a config object or a db connection string. */
 function loadDbConfig(): Options | string {

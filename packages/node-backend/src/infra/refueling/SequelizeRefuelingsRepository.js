@@ -2,6 +2,10 @@ const RefuelingMapper = require('./SequelizeRefuelingMapper');
 
 class SequelizeRefuelingsRepository {
   constructor({ RefuelingModel }) {
+    console.log('test');
+    console.log('test');
+    console.log('test');
+    console.log(RefuelingModel);
     this.RefuelingModel = RefuelingModel;
   }
 

@@ -1,17 +1,17 @@
-const { Router } = require('express');
+import { Router } from 'express';
 const statusMonitor = require('express-status-monitor');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const methodOverride = require('method-override');
 const controller = require('./utils/createControllerRoutes');
 
-module.exports = ({
+const router = ({
   config,
   containerMiddleware,
   loggerMiddleware,
   errorHandler,
   swaggerMiddleware,
-}) => {
+}): Router => {
   const router = Router();
 
   /* istanbul ignore if */
@@ -51,3 +51,5 @@ module.exports = ({
 
   return router;
 };
+
+export default router;
