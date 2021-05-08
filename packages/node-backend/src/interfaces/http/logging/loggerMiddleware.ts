@@ -1,8 +1,8 @@
-const morgan = require('morgan');
+import morgan from 'morgan';
 const LoggerStreamAdapter = require('src/infra/logging/LoggerStreamAdapter');
 
-module.exports = ({ logger }) => {
+export default ({ logger }) => {
   return morgan('dev', {
-    stream: LoggerStreamAdapter.toStream(logger)
+    stream: LoggerStreamAdapter.toStream(logger),
   });
 };

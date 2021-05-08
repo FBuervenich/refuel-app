@@ -11,5 +11,5 @@
     },
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.js", "index.ts"]
+  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.ts", "index.ts"]
 }

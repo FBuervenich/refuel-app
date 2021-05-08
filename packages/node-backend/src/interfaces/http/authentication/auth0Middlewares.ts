@@ -1,5 +1,6 @@
-var jwt = require('express-jwt');
-var jwks = require('jwks-rsa');
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'express-jwt';
+import jwks from 'jwks-rsa';
 
 const jwtCheck = jwt({
   secret: jwks.expressJwtSecret({
@@ -13,9 +14,10 @@ const jwtCheck = jwt({
   algorithms: ['RS256'],
 });
 
-const userIdExtractor = (req, res, next) => {
-  res.locals.userId = req.user.sub;
+const userIdExtractor = (req: Request, res: Response, next: NextFunction) => {
+  res.callingUserId = req.user.sub;
   next();
 };
 
-module.exports = [jwtCheck, userIdExtractor];
+const middlewares = [jwtCheck, userIdExtractor];
+export default middlewares;

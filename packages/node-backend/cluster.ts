@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-const pm2 = require('pm2');
+import pm2 from 'pm2';
 
-const instances = process.env.WEB_CONCURRENCY || -1;
+const instances = parseInt(process.env.WEB_CONCURRENCY) || -1;
 const maxMemory = process.env.WEB_MEMORY || 512;
 
 pm2.connect(() => {

@@ -27,7 +27,7 @@ const RefuelingsController = {
         })
         .on(ERROR, next);
 
-      const userId = res.locals.userId;
+      const userId = res.callingUserId;
       getAllRefuelings.execute(userId);
     }
   ),
@@ -47,7 +47,7 @@ const RefuelingsController = {
       })
       .on(ERROR, next);
 
-    const userId = res.locals.userId;
+    const userId = res.callingUserId;
     getRefueling.execute(Number(req.params.id), userId);
   }),
 
@@ -69,7 +69,7 @@ const RefuelingsController = {
         })
         .on(ERROR, next);
 
-      const userId = res.locals.userId;
+      const userId = res.callingUserId;
       createRefueling.execute(req.body, userId);
     }
   ),

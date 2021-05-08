@@ -8,14 +8,14 @@ export default class Server {
   private logger: Logger;
   private express: Express;
 
-  constructor({ config, router, logger, authenticationMiddleWare }) {
+  constructor({ config, router, logger, authenticationMiddlewares }) {
     this.config = config;
     this.logger = logger;
     this.express = express();
 
     this.express.disable('x-powered-by');
     this.express.use(cors());
-    this.express.use(...authenticationMiddleWare);
+    this.express.use(...authenticationMiddlewares);
 
     this.express.use(router);
   }

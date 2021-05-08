@@ -6,7 +6,7 @@ import {
   InjectionMode,
 } from 'awilix';
 import { scopePerRequest } from 'awilix-express';
-import { Router } from 'express';
+import { ErrorRequestHandler, RequestHandler, Router } from 'express';
 import { Logger } from 'log4js';
 
 import config from '../config';
@@ -34,13 +34,13 @@ const RefuelingSerializer = require('./interfaces/http/refueling/RefuelingSerial
 
 import Server from './interfaces/http/Server';
 import router from './interfaces/http/router';
-const loggerMiddleware = require('./interfaces/http/logging/loggerMiddleware');
-const errorHandler = require('./interfaces/http/errors/errorHandler');
-const devErrorHandler = require('./interfaces/http/errors/devErrorHandler');
-const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware');
+import loggerMiddleware from './interfaces/http/logging/loggerMiddleware';
+import errorHandler from './interfaces/http/errors/errorHandler';
+import devErrorHandler from './interfaces/http/errors/devErrorHandler';
+import swaggerMiddleware from './interfaces/http/swagger/swaggerMiddleware';
 
 import logger from './infra/logging/logger';
-const auth0Middleware = require('./infra/authentication/auth0middleware');
+import auth0Middlewares from './interfaces/http/authentication/auth0Middlewares';
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
 const {
@@ -49,7 +49,7 @@ const {
   RefuelingModel,
 } = require('./infra/database/models');
 
-interface ICradle {
+export interface ICradle {
   // System
   app: Application;
   server: Server;
@@ -58,13 +58,17 @@ interface ICradle {
   config: Config;
 
   // Middlewares
-  // loggerMiddleware:
+  loggerMiddleware: ReturnType<typeof loggerMiddleware>;
+  authenticationMiddlewares: RequestHandler[];
+  containerMiddleware: RequestHandler;
+  errorHandler: ErrorRequestHandler;
+  swaggerMiddleware: RequestHandler[];
 }
 
 // const container = createContainer<ICradle>({
-// injectionMode: InjectionMode.CLASSIC,
 const container = createContainer({
   injectionMode: InjectionMode.PROXY,
+  // injectionMode: InjectionMode.CLASSIC,
 });
 
 // System
@@ -87,7 +91,7 @@ container
     loggerMiddleware: asFunction(loggerMiddleware).singleton(),
   })
   .register({
-    authenticationMiddleWare: asValue(auth0Middleware),
+    authenticationMiddlewares: asValue(auth0Middlewares),
   })
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),
