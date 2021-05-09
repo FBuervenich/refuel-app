@@ -1,4 +1,10 @@
-import { JsonObject } from '../json/types';
+import { Json, JsonObject } from '../json/types';
+
+/** An error appearing in a sequelize repository */
+export interface RepositoryError {
+  message: string;
+  details: Json;
+}
 
 /** A generic error base type. */
 export interface IBaseError {

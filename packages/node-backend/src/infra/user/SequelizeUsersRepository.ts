@@ -1,19 +1,13 @@
-import { IInfraError } from '@/app/utils/errors/types';
-import { IErrorFactory } from '@/app/utils/errors/utils';
+import { RepositoryError } from '@/app/utils/errors/types';
+import { err, ok, Result } from 'neverthrow';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
-import { Context } from '../contexts';
 const UserMapper = require('./SequelizeUserMapper');
 
 class SequelizeUsersRepository {
   private UserModel: TodoAny;
-  private createError: IErrorFactory<IInfraError>;
-  private errorFactory: (context: Context) => IErrorFactory<IInfraError>;
 
-  constructor({ UserModel, infraErrorFactory }) {
+  constructor({ UserModel }) {
     this.UserModel = UserModel;
-    this.errorFactory = infraErrorFactory;
-
-    this.createError = this.errorFactory('user');
   }
 
   async getAll(...args) {
@@ -28,29 +22,40 @@ class SequelizeUsersRepository {
     return UserMapper.toEntity(user);
   }
 
-  async add(user) {
+  async add(user): Promise<Result<TodoAny, RepositoryError>> {
     const { valid, errors } = user.validate();
 
     if (!valid) {
-      const error = new Error('ValidationError');
-      error.details = errors;
-
-      throw error;
+      const error: RepositoryError = {
+        message: 'ValidationError',
+        details: errors,
+      };
+      return err(error);
     }
 
     const newUser = await this.UserModel.create(UserMapper.toDatabase(user));
-    return UserMapper.toEntity(newUser);
+    const result = UserMapper.toEntity(newUser);
+    return ok(result);
   }
 
-  async remove(id) {
-    const user = await this._getById(id);
+  async remove(id): Promise<Result<TodoAny, RepositoryError>> {
+    const userResult = await this._getById(id);
 
-    await user.destroy();
-    return;
+    if (userResult.isErr()) {
+      return userResult;
+    }
+    await userResult.value.destroy();
+    return ok(id);
   }
 
-  async update(id, newData) {
-    const user = await this._getById(id);
+  async update(id, newData): Promise<Result<TodoAny, RepositoryError>> {
+    const userResult = await this._getById(id);
+
+    if (userResult.isErr()) {
+      return userResult;
+    }
+
+    const user = userResult.value;
 
     const transaction = await this.UserModel.sequelize.transaction();
 
@@ -61,19 +66,23 @@ class SequelizeUsersRepository {
       const { valid, errors } = userEntity.validate();
 
       if (!valid) {
-        const error = new Error('ValidationError');
-        error.details = errors;
-
-        throw error;
+        const error: RepositoryError = {
+          message: 'ValidationError',
+          details: errors,
+        };
+        return err(error);
       }
-
       await transaction.commit();
 
-      return userEntity;
-    } catch (error) {
+      return ok(userEntity);
+    } catch (e) {
       await transaction.rollback();
 
-      throw error;
+      const error: RepositoryError = {
+        message: 'Error',
+        details: e,
+      };
+      return err(error);
     }
   }
 
@@ -82,19 +91,25 @@ class SequelizeUsersRepository {
   }
 
   // Private
-
-  async _getById(id) {
+  async _getById(id): Promise<Result<TodoAny, RepositoryError>> {
     try {
-      return await this.UserModel.findByPk(id, { rejectOnEmpty: true });
-    } catch (error) {
-      if (error.name === 'SequelizeEmptyResultError') {
-        const notFoundError = new Error('NotFoundError');
-        notFoundError.details = `User with id ${id} can't be found.`;
+      const user = await this.UserModel.findByPk(id, { rejectOnEmpty: true });
+      return ok(user);
+    } catch (e) {
+      if (e.name === 'SequelizeEmptyResultError') {
+        const error: RepositoryError = {
+          message: 'NotFoundError',
+          details: `User with id ${id} can't be found.`,
+        };
 
-        throw notFoundError;
+        return err(error);
       }
 
-      throw error;
+      const error: RepositoryError = {
+        message: 'Error',
+        details: e,
+      };
+      return err(error);
     }
   }
 }
