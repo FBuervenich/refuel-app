@@ -1,7 +1,8 @@
 import { Sequelize, DataTypes, Options } from 'sequelize';
-const { ModelsLoader } = require('src/infra/sequelize');
+import sequelizeInfra from '@/infra/sequelize';
 import appConfig from '../../../../config';
 
+const { ModelsLoader } = sequelizeInfra;
 const config = appConfig.db as Options;
 
 if (config) {

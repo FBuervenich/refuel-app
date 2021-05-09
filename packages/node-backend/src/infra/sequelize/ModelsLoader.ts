@@ -1,7 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import { Dictionary } from 'lodash';
+import path from 'path';
+import { TodoAny } from '../../../../common/types/ToDoTypes';
 
-module.exports = {
+const ModelsLoader = {
   load({
     Sequelize,
     sequelize,
@@ -9,17 +11,17 @@ module.exports = {
     baseFolder,
     indexFile = 'index.js',
   }) {
-    const loaded = {};
+    const loaded: Dictionary<TodoAny> = {};
 
     fs.readdirSync(baseFolder)
-      .filter((file) => {
+      .filter(file => {
         return (
           file.indexOf('.') !== 0 &&
           file !== indexFile &&
           file.slice(-3) === '.js'
         );
       })
-      .forEach((file) => {
+      .forEach(file => {
         const model = require(path.join(baseFolder, file))(
           Sequelize,
           sequelize,
@@ -28,7 +30,7 @@ module.exports = {
         loaded[model.name] = model;
       });
 
-    Object.keys(loaded).forEach((modelName) => {
+    Object.keys(loaded).forEach(modelName => {
       if (loaded[modelName].associate) {
         loaded[modelName].associate(loaded);
       }
@@ -39,3 +41,5 @@ module.exports = {
     return loaded;
   },
 };
+
+export default ModelsLoader;
