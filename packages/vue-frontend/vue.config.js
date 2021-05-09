@@ -19,6 +19,7 @@ module.exports = {
         logLevel: 'debug',
       },
     },
+    disableHostCheck: true,
   },
   transpileDependencies: ['vuex-module-decorators'],
 
