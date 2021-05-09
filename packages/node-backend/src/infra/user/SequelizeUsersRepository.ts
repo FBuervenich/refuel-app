@@ -1,8 +1,19 @@
+import { IInfraError } from '@/app/utils/errors/types';
+import { IErrorFactory } from '@/app/utils/errors/utils';
+import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { Context } from '../contexts';
 const UserMapper = require('./SequelizeUserMapper');
 
 class SequelizeUsersRepository {
-  constructor({ UserModel }) {
+  private UserModel: TodoAny;
+  private createError: IErrorFactory<IInfraError>;
+  private errorFactory: (context: Context) => IErrorFactory<IInfraError>;
+
+  constructor({ UserModel, infraErrorFactory }) {
     this.UserModel = UserModel;
+    this.errorFactory = infraErrorFactory;
+
+    this.createError = this.errorFactory('user');
   }
 
   async getAll(...args) {
@@ -88,4 +99,4 @@ class SequelizeUsersRepository {
   }
 }
 
-module.exports = SequelizeUsersRepository;
+export default SequelizeUsersRepository;

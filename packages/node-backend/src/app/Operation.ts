@@ -1,23 +1,27 @@
-const EventEmitter = require('events');
+import EventEmitter from 'events';
 const define = Object.defineProperty;
 
 class Operation extends EventEmitter {
-  static setOutputs(outputs) {
+  outputs: string[];
+
+  static setOutputs(outputs: string[]) {
     define(this.prototype, 'outputs', {
-      value: createOutputs(outputs)
+      value: createOutputs(outputs),
     });
   }
 
   on(output, handler) {
-    if(this.outputs[output]) {
+    if (this.outputs[output]) {
       return this.addListener(output, handler);
     }
 
-    throw new Error(`Invalid output "${output}" to operation ${this.constructor.name}.`);
+    throw new Error(
+      `Invalid output "${output}" to operation ${this.constructor.name}.`
+    );
   }
 }
 
-const createOutputs = (outputsArray) => {
+const createOutputs = (outputsArray: string[]) => {
   return outputsArray.reduce((obj, output) => {
     obj[output] = output;
     return obj;

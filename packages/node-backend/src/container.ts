@@ -12,6 +12,8 @@ import { Logger } from 'log4js';
 import config from '../config';
 import { Config } from '../config';
 
+import { infraErrorFactory } from './app/utils/errors/utils';
+
 import Application from './app/Application';
 const {
   CreateUser,
@@ -41,7 +43,8 @@ import swaggerMiddleware from './interfaces/http/swagger/swaggerMiddleware';
 
 import logger from './infra/logging/logger';
 import auth0Middlewares from './interfaces/http/authentication/auth0Middlewares';
-const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
+import SequelizeUsersRepository from './infra/user/SequelizeUsersRepository';
+
 const SequelizeRefuelingsRepository = require('./infra/refueling/SequelizeRefuelingsRepository');
 const {
   database,
@@ -56,6 +59,7 @@ export interface ICradle {
   router: Router;
   logger: Logger;
   config: Config;
+  infraErrorFactory: typeof infraErrorFactory;
 
   // Middlewares
   loggerMiddleware: ReturnType<typeof loggerMiddleware>;
@@ -83,6 +87,9 @@ container
   })
   .register({
     config: asValue(config),
+  })
+  .register({
+    infraErrorFactory: asFunction(infraErrorFactory),
   });
 
 // Middlewares
@@ -96,7 +103,7 @@ container
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),
     errorHandler: asValue(config.production ? errorHandler : devErrorHandler),
-    swaggerMiddleware: asValue([swaggerMiddleware]),
+    swaggerMiddleware: asValue(swaggerMiddleware),
   });
 
 // Repositories
