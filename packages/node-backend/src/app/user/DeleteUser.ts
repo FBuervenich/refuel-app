@@ -1,6 +1,9 @@
-const Operation = require('src/app/Operation');
+import Operation from '../Operation';
+import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 class DeleteUser extends Operation {
+  usersRepository: TodoAny;
+
   constructor({ usersRepository }) {
     super();
     this.usersRepository = usersRepository;
@@ -12,8 +15,8 @@ class DeleteUser extends Operation {
     try {
       await this.usersRepository.remove(userId);
       this.emit(SUCCESS);
-    } catch(error) {
-      if(error.message === 'NotFoundError') {
+    } catch (error) {
+      if (error.message === 'NotFoundError') {
         return this.emit(NOT_FOUND, error);
       }
 
@@ -24,4 +27,4 @@ class DeleteUser extends Operation {
 
 DeleteUser.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND']);
 
-module.exports = DeleteUser;
+export default DeleteUser;

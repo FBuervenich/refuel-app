@@ -1,6 +1,10 @@
-const Operation = require('src/app/Operation');
+import Operation from '../Operation';
+
+import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 class GetUser extends Operation {
+  usersRepository: TodoAny;
+
   constructor({ usersRepository }) {
     super();
     this.usersRepository = usersRepository;
@@ -12,10 +16,10 @@ class GetUser extends Operation {
     try {
       const user = await this.usersRepository.getById(userId);
       this.emit(SUCCESS, user);
-    } catch(error) {
+    } catch (error) {
       this.emit(NOT_FOUND, {
         type: error.message,
-        details: error.details
+        details: error.details,
       });
     }
   }
@@ -23,4 +27,4 @@ class GetUser extends Operation {
 
 GetUser.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND']);
 
-module.exports = GetUser;
+export default GetUser;

@@ -1,16 +1,12 @@
 import { RepositoryError } from '@/app/utils/errors/types';
 import { err, ok, Result } from 'neverthrow';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
-const RefuelingMapper = require('./SequelizeRefuelingMapper');
+import RefuelingMapper from './SequelizeRefuelingMapper';
 
 class SequelizeRefuelingsRepository {
   private RefuelingModel: TodoAny;
 
   constructor({ RefuelingModel }) {
-    console.log('test');
-    console.log('test');
-    console.log('test');
-    console.log(RefuelingModel);
     this.RefuelingModel = RefuelingModel;
   }
 

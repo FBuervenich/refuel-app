@@ -1,4 +1,4 @@
-const { attributes } = require('structure');
+import { attributes } from 'structure';
 
 const User = attributes({
   id: Number,
@@ -9,12 +9,13 @@ const User = attributes({
   age: Number,
 })(
   class User {
+    age: number;
     isLegal() {
-      return this.age >= User.MIN_LEGAL_AGE;
+      return this.age >= MIN_LEGAL_AGE;
     }
   }
 );
 
-User.MIN_LEGAL_AGE = 21;
+const MIN_LEGAL_AGE = 21;
 
-module.exports = User;
+export default User;

@@ -1,15 +1,18 @@
 import fs from 'fs';
 import { Dictionary } from 'lodash';
 import path from 'path';
+import { Sequelize } from 'sequelize/types';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 const ModelsLoader = {
   load({
-    Sequelize,
     sequelize,
-    DataTypes,
     baseFolder,
     indexFile = 'index.js',
+  }: {
+    sequelize: Sequelize;
+    baseFolder: string;
+    indexFile?: string;
   }) {
     const loaded: Dictionary<TodoAny> = {};
 
@@ -22,11 +25,7 @@ const ModelsLoader = {
         );
       })
       .forEach(file => {
-        const model = require(path.join(baseFolder, file))(
-          Sequelize,
-          sequelize,
-          DataTypes
-        );
+        const model = require(path.join(baseFolder, file))(sequelize);
         loaded[model.name] = model;
       });
 

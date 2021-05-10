@@ -1,4 +1,4 @@
-const { attributes } = require('structure');
+import { attributes } from 'structure';
 
 const Refueling = attributes({
   id: Number,
@@ -37,6 +37,14 @@ const Refueling = attributes({
   },
 })(
   class Refueling {
+    litres: number;
+    price: number;
+    pricePerLitre: number;
+    totalKilometers: number;
+    dayKilometers: number;
+    fullTank: boolean;
+    madeAt: Date;
+    userId: string;
     /**
      * Calculates the litre price based on the amount of litres and the total price
      */
@@ -60,4 +68,4 @@ const Refueling = attributes({
   }
 );
 
-module.exports = Refueling;
+export default Refueling;

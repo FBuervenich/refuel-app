@@ -1,6 +1,9 @@
-const Operation = require('src/app/Operation');
+import Operation from '../Operation';
+import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 class GetAllUsers extends Operation {
+  usersRepository: TodoAny;
+
   constructor({ usersRepository }) {
     super();
     this.usersRepository = usersRepository;
@@ -11,11 +14,11 @@ class GetAllUsers extends Operation {
 
     try {
       const users = await this.usersRepository.getAll({
-        attributes: ['id', 'name']
+        attributes: ['id', 'name'],
       });
 
       this.emit(SUCCESS, users);
-    } catch(error) {
+    } catch (error) {
       this.emit(ERROR, error);
     }
   }
@@ -23,4 +26,4 @@ class GetAllUsers extends Operation {
 
 GetAllUsers.setOutputs(['SUCCESS', 'ERROR']);
 
-module.exports = GetAllUsers;
+export default GetAllUsers;

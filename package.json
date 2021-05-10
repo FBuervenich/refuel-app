@@ -8,7 +8,7 @@
   "scripts": {
     "serve-frontend": "yarn workspace vue-frontend serve",
     "serve-backend": "yarn workspace node-backend dev",
-    "serve-stack": "concurrently --kill-others-on-fail \"yarn vue-frontend\" \"yarn node-backend\""
+    "serve-stack": "concurrently -k --kill-others-on-fail -p \"[{name}]\" -n \"Frontend,Backend\" -c \"#42b883.bold,#68a063.bold\" \"yarn serve-frontend\" \"yarn serve-backend\""
   },
   "repository": "https://github.com/FBuervenich/basic-refuel-app",
   "author": "Florentin Bürvenich <florentin@familie-buervenich.de>",

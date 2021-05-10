@@ -13,6 +13,9 @@ class SequelizeUsersRepository {
   async getAll(...args) {
     const users = await this.UserModel.findAll(...args);
 
+    console.log(this.UserModel);
+    console.log(typeof this.UserModel);
+
     return users.map(UserMapper.toEntity);
   }
 
@@ -91,7 +94,7 @@ class SequelizeUsersRepository {
   }
 
   // Private
-  async _getById(id): Promise<Result<TodoAny, RepositoryError>> {
+  async _getById(id: number): Promise<Result<TodoAny, RepositoryError>> {
     try {
       const user = await this.UserModel.findByPk(id, { rejectOnEmpty: true });
       return ok(user);

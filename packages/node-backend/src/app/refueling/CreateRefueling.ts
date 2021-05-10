@@ -1,7 +1,11 @@
-const Operation = require('src/app/Operation');
-const Refueling = require('src/domain/refueling/Refueling');
+import { TodoAny } from '../../../../common/types/ToDoTypes';
+import Operation from '../Operation';
+
+import Refueling from '@/domain/refueling/Refueling';
 
 class CreateRefueling extends Operation {
+  refuelingsRepository: TodoAny;
+
   constructor({ refuelingsRepository }) {
     super();
     this.refuelingsRepository = refuelingsRepository;

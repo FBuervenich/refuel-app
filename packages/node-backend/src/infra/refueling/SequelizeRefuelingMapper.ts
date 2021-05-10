@@ -1,4 +1,4 @@
-const Refueling = require('src/domain/refueling/Refueling');
+import Refueling from '@/domain/refueling/Refueling';
 
 const SequelizeRefuelingMapper = {
   toEntity(dbSurvivor) {
@@ -52,4 +52,4 @@ const SequelizeRefuelingMapper = {
   },
 };
 
-module.exports = SequelizeRefuelingMapper;
+export default SequelizeRefuelingMapper;

@@ -1,6 +1,9 @@
-const Operation = require('src/app/Operation');
+import { TodoAny } from '../../../../common/types/ToDoTypes';
+import Operation from '../Operation';
 
 class DeleteRefueling extends Operation {
+  refuelingsRepository: TodoAny;
+
   constructor({ refuelingsRepository }) {
     super();
     this.refuelingsRepository = refuelingsRepository;

@@ -1,6 +1,6 @@
-'use strict';
+import Sequelize, { DataTypes } from 'sequelize';
 
-module.exports = function(Sequelize, sequelize, DataTypes) {
+const RefuelingsModel = function(sequelize) {
   class RefuelingModel extends Sequelize.Model {}
 
   return RefuelingModel.init(
@@ -44,3 +44,5 @@ module.exports = function(Sequelize, sequelize, DataTypes) {
     }
   );
 };
+
+export default RefuelingsModel;

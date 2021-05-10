@@ -1,6 +1,10 @@
-const Operation = require('src/app/Operation');
+import Operation from '../Operation';
+
+import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 class UpdateUser extends Operation {
+  usersRepository: TodoAny;
+
   constructor({ usersRepository }) {
     super();
     this.usersRepository = usersRepository;
@@ -27,4 +31,4 @@ class UpdateUser extends Operation {
 
 UpdateUser.setOutputs(['SUCCESS', 'NOT_FOUND', 'VALIDATION_ERROR', 'ERROR']);
 
-module.exports = UpdateUser;
+export default UpdateUser;

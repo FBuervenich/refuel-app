@@ -1,7 +1,10 @@
-const Operation = require('src/app/Operation');
-const User = require('src/domain/user/User');
+import Operation from '../Operation';
+import { TodoAny } from '../../../../common/types/ToDoTypes';
+import User from '@/domain/user/User';
 
 class CreateUser extends Operation {
+  usersRepository: TodoAny;
+
   constructor({ usersRepository }) {
     super();
     this.usersRepository = usersRepository;
@@ -16,8 +19,8 @@ class CreateUser extends Operation {
       const newUser = await this.usersRepository.add(user);
 
       this.emit(SUCCESS, newUser);
-    } catch(error) {
-      if(error.message === 'ValidationError') {
+    } catch (error) {
+      if (error.message === 'ValidationError') {
         return this.emit(VALIDATION_ERROR, error);
       }
 

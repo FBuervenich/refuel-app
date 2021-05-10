@@ -1,8 +1,10 @@
 import EventEmitter from 'events';
+import { Dictionary } from 'lodash';
+import { TodoAny } from '../../../common/types/ToDoTypes';
 const define = Object.defineProperty;
 
 class Operation extends EventEmitter {
-  outputs: string[];
+  outputs: Dictionary<TodoAny>;
 
   static setOutputs(outputs: string[]) {
     define(this.prototype, 'outputs', {
@@ -28,4 +30,4 @@ const createOutputs = (outputsArray: string[]) => {
   }, Object.create(null));
 };
 
-module.exports = Operation;
+export default Operation;
