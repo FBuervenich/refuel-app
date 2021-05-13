@@ -117,4 +117,4 @@ class SequelizeRefuelingsRepository {
   }
 }
 
-module.exports = SequelizeRefuelingsRepository;
+export default SequelizeRefuelingsRepository;

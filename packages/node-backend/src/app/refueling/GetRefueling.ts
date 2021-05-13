@@ -15,7 +15,7 @@ class GetRefueling extends Operation {
    * @param {string | undefined} userId
    */
   async execute(refuelingId, userId) {
-    const { SUCCESS, NOT_FOUND } = this.outputs;
+    const { SUCCESS, NOT_FOUND, FORBIDDEN } = this.outputs;
 
     let refueling;
     try {
@@ -33,7 +33,7 @@ class GetRefueling extends Operation {
         details: `NOT ALLOWED TO FETCH REFUELING WITH ID ${refuelingId}`,
       });
     } else {
-      this.emmit(SUCCESS, refueling);
+      this.emit(SUCCESS, refueling);
     }
   }
 }

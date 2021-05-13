@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { Dictionary } from 'lodash';
 import path from 'path';
-import { Sequelize } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 const ModelsLoader = {
@@ -14,7 +14,7 @@ const ModelsLoader = {
     baseFolder: string;
     indexFile?: string;
   }) {
-    const loaded: Dictionary<TodoAny> = {};
+    const loaded: Dictionary<Model> = {};
 
     fs.readdirSync(baseFolder)
       .filter(file => {
@@ -25,18 +25,9 @@ const ModelsLoader = {
         );
       })
       .forEach(file => {
-        const model = require(path.join(baseFolder, file))(sequelize);
-        // const model = import(path.join(baseFolder, file))(sequelize);
+        const model = require(path.join(baseFolder, file)).default(sequelize);
         loaded[model.name] = model;
       });
-
-    Object.keys(loaded).forEach(modelName => {
-      if (loaded[modelName].associate) {
-        loaded[modelName].associate(loaded);
-      }
-    });
-
-    loaded.database = sequelize;
 
     return loaded;
   },

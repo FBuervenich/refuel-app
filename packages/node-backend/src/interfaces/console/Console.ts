@@ -1,8 +1,8 @@
-const REPL = require('repl');
-const vm = require('vm');
+import REPL from 'repl';
+import vm from 'vm';
 
-module.exports = {
-  start(options = {}) {
+export default {
+  start(options = { expose: {} }) {
     const { expose } = options;
 
     const repl = REPL.start({

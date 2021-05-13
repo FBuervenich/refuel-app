@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 
 // TODO move to /domain/refueling
 interface RefuelingAttributes {
@@ -16,7 +16,7 @@ interface RefuelingAttributes {
 interface RefuelingCreationAttributes
   extends Optional<RefuelingAttributes, 'id'> {}
 
-const RefuelingsModel = function(sequelize) {
+const RefuelingsModel = function(sequelize: Sequelize) {
   class Refueling
     extends Model<RefuelingAttributes, RefuelingCreationAttributes>
     implements RefuelingAttributes {
@@ -33,7 +33,7 @@ const RefuelingsModel = function(sequelize) {
   return Refueling.init(
     {
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },

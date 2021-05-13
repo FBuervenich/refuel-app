@@ -1,3 +1,4 @@
+import { Dictionary } from 'lodash';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
 import Operation from '../Operation';
 
@@ -16,7 +17,7 @@ class GetAllRefuelings extends Operation {
   async execute(userId) {
     const { SUCCESS, ERROR } = this.outputs;
 
-    const args = {
+    const args: Dictionary<TodoAny> = {
       attributes: [
         'id',
         'litres',
