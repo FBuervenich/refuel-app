@@ -1,6 +1,6 @@
 import { Logger } from 'log4js';
-import { Sequelize } from 'sequelize/types';
-import Server from '@/interfaces/http/Server';
+import { Sequelize } from 'sequelize';
+import Server from '../interfaces/http/Server';
 
 export default class Application {
   private server: Server;

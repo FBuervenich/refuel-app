@@ -1,5 +1,5 @@
 import { Sequelize, Options } from 'sequelize';
-import sequelizeInfra from '@/infra/sequelize';
+import sequelizeInfra from '../../../infra/sequelize';
 import appConfig from '../../../../config';
 
 const { ModelsLoader } = sequelizeInfra;

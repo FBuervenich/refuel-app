@@ -1,4 +1,4 @@
-import Refueling from '@/domain/refueling/Refueling';
+import Refueling from '../../domain/refueling/Refueling';
 
 const SequelizeRefuelingMapper = {
   toEntity(dbSurvivor) {

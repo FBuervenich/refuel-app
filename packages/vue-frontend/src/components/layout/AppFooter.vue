@@ -1,16 +1,19 @@
 <template>
   <div class="footer">
-    <span>ABC</span>
-    <span>ABC</span>
-    <span>ABC</span>
-    <span>
-      <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
-      <el-link
-        href="https://github.com/FBuervenich/basic-refuel-app/"
-        target="_blank"
-        >Github</el-link
-      >
-    </span>
+    <div></div>
+    <div>
+      <span>ABC</span>
+      <span>ABC</span>
+      <span>ABC</span>
+      <span>
+        <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
+        <el-link
+          href="https://github.com/FBuervenich/basic-refuel-app/"
+          target="_blank"
+          >Github</el-link
+        >
+      </span>
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,9 @@ export default defineComponent({
   padding: 30px 0;
   background-color: #f8f8f8;
   text-align: center;
+  // width: 100%;
+  // display: flex;
+
   span {
     padding: 0 10px;
     font-size: 18px;

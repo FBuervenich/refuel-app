@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { Dictionary } from 'lodash';
 import path from 'path';
-import { Sequelize } from 'sequelize/types';
+import { Sequelize } from 'sequelize';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
 
 const ModelsLoader = {
@@ -26,6 +26,7 @@ const ModelsLoader = {
       })
       .forEach(file => {
         const model = require(path.join(baseFolder, file))(sequelize);
+        // const model = import(path.join(baseFolder, file))(sequelize);
         loaded[model.name] = model;
       });
 

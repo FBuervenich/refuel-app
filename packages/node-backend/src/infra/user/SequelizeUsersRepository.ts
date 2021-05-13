@@ -1,4 +1,4 @@
-import { RepositoryError } from '@/app/utils/errors/types';
+import { RepositoryError } from '../../app/utils/errors/types';
 import { err, ok, Result } from 'neverthrow';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
 const UserMapper = require('./SequelizeUserMapper');

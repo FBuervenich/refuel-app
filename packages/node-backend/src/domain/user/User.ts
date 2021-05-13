@@ -10,6 +10,7 @@ const User = attributes({
 })(
   class User {
     age: number;
+
     isLegal() {
       return this.age >= MIN_LEGAL_AGE;
     }

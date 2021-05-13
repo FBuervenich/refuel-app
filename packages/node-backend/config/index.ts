@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { Options } from 'sequelize/types';
+import { Options } from 'sequelize';
 import { Configuration } from 'log4js';
 
 require('dotenv').config();

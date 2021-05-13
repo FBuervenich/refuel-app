@@ -1,10 +1,42 @@
-import Sequelize, { DataTypes } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
+
+// TODO move to /domain/refueling
+interface RefuelingAttributes {
+  id: number;
+  litres: number;
+  price: number;
+  pricePerLitre: number;
+  totalKilometers: number;
+  dayKilometers: number;
+  fullTank: boolean;
+  madeAt: Date;
+  userId: string;
+}
+
+interface RefuelingCreationAttributes
+  extends Optional<RefuelingAttributes, 'id'> {}
 
 const RefuelingsModel = function(sequelize) {
-  class RefuelingModel extends Sequelize.Model {}
-
-  return RefuelingModel.init(
+  class Refueling
+    extends Model<RefuelingAttributes, RefuelingCreationAttributes>
+    implements RefuelingAttributes {
+    public id!: number;
+    public litres!: number;
+    public price!: number;
+    public pricePerLitre!: number;
+    public totalKilometers!: number | null;
+    public dayKilometers!: number | null;
+    public fullTank!: boolean;
+    public madeAt!: Date;
+    public userId!: string;
+  }
+  return Refueling.init(
     {
+      id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       litres: {
         type: DataTypes.DOUBLE,
         allowNull: false,

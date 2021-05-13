@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const Operation = require('@/app/Operation');
+const Operation = require('../../../app/Operation');
 
 describe('App :: Operation', () => {
   var CustomOperation;

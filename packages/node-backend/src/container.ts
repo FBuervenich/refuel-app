@@ -15,13 +15,13 @@ import { Config } from '../config';
 import { infraErrorFactory } from './app/utils/errors/utils';
 
 import Application from './app/Application';
-const {
+import {
   CreateUser,
   GetAllUsers,
   GetUser,
   UpdateUser,
   DeleteUser,
-} = require('./app/user');
+} from './app/user';
 
 const {
   CreateRefueling,

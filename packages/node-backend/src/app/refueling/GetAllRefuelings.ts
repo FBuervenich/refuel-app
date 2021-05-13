@@ -46,4 +46,4 @@ class GetAllRefuelings extends Operation {
 
 GetAllRefuelings.setOutputs(['SUCCESS', 'ERROR']);
 
-module.exports = GetAllRefuelings;
+export default GetAllRefuelings;

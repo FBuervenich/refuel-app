@@ -40,4 +40,4 @@ class GetRefueling extends Operation {
 
 GetRefueling.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND', 'FORBIDDEN']);
 
-module.exports = GetRefueling;
+export default GetRefueling;

@@ -1,4 +1,4 @@
-const User = require('src/domain/user/User');
+import User from '../../domain/user/User';
 
 const SequelizeUserMapper = {
   toEntity(dbSurvivor) {
@@ -14,4 +14,4 @@ const SequelizeUserMapper = {
   },
 };
 
-module.exports = SequelizeUserMapper;
+export default SequelizeUserMapper;

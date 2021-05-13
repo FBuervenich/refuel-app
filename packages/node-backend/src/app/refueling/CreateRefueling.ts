@@ -1,7 +1,6 @@
 import { TodoAny } from '../../../../common/types/ToDoTypes';
+import Refueling from '../../domain/refueling/Refueling';
 import Operation from '../Operation';
-
-import Refueling from '@/domain/refueling/Refueling';
 
 class CreateRefueling extends Operation {
   refuelingsRepository: TodoAny;
@@ -32,4 +31,4 @@ class CreateRefueling extends Operation {
 
 CreateRefueling.setOutputs(['SUCCESS', 'ERROR', 'VALIDATION_ERROR']);
 
-module.exports = CreateRefueling;
+export default CreateRefueling;

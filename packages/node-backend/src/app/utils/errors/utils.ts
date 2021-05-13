@@ -1,4 +1,4 @@
-import { Context as InfraContext } from '@/infra/contexts';
+import { Context as InfraContext } from '../../../infra/contexts';
 import { ErrorParameters, IBaseError, IInfraError } from './types';
 
 export type IErrorFactory<E extends IBaseError> = (

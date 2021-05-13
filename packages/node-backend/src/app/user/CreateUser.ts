@@ -1,6 +1,6 @@
 import Operation from '../Operation';
 import { TodoAny } from '../../../../common/types/ToDoTypes';
-import User from '@/domain/user/User';
+import User from '../../domain/user/User';
 
 class CreateUser extends Operation {
   usersRepository: TodoAny;
@@ -31,4 +31,4 @@ class CreateUser extends Operation {
 
 CreateUser.setOutputs(['SUCCESS', 'ERROR', 'VALIDATION_ERROR']);
 
-module.exports = CreateUser;
+export default CreateUser;

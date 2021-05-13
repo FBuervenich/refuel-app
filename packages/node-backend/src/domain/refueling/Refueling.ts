@@ -37,6 +37,7 @@ const Refueling = attributes({
   },
 })(
   class Refueling {
+    id: number;
     litres: number;
     price: number;
     pricePerLitre: number;
@@ -45,6 +46,7 @@ const Refueling = attributes({
     fullTank: boolean;
     madeAt: Date;
     userId: string;
+
     /**
      * Calculates the litre price based on the amount of litres and the total price
      */

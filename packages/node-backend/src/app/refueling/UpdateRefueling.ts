@@ -40,4 +40,4 @@ UpdateRefueling.setOutputs([
   'ERROR',
 ]);
 
-module.exports = UpdateRefueling;
+export default UpdateRefueling;

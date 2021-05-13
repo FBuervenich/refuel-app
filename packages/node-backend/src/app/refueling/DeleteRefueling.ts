@@ -27,4 +27,4 @@ class DeleteRefueling extends Operation {
 
 DeleteRefueling.setOutputs(['SUCCESS', 'ERROR', 'NOT_FOUND']);
 
-module.exports = DeleteRefueling;
+export default DeleteRefueling;
