@@ -5,11 +5,17 @@
     "outDir": "dist",
     "allowJs": true,
     "target": "ESNext",
+    "declaration": true /* Generates corresponding '.d.ts' file. */,
+    "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
+    "sourceMap": true,
     "resolveJsonModule": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "esModuleInterop": true
+    // "baseUrl": "./",
+    // "paths": {
+    //   "@/*": ["./src/*"]
+    // },
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.ts", "index.ts"]
+  "include": ["src/**/*", "config/**/*", "test/**/*", "cluster.ts", "index.ts"],
+  "exclude": ["dist"]
 }
