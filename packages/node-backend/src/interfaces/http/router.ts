@@ -1,9 +1,11 @@
 import { Router } from 'express';
-const statusMonitor = require('express-status-monitor');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const methodOverride = require('method-override');
-const controller = require('./utils/createControllerRoutes');
+import statusMonitor from 'express-status-monitor';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import methodOverride from 'method-override';
+import controller from './utils/createControllerRoutes';
+import UsersController from './user/UsersController';
+import RefuelingsController from './refueling/RefuelingsController';
 
 const router = ({
   config,
@@ -42,8 +44,8 @@ const router = ({
    * The `controllerPath` is relative to the `interfaces/http` folder
    */
 
-  apiRouter.use('/users', controller('user/UsersController'));
-  apiRouter.use('/refuelings', controller('refueling/RefuelingsController'));
+  apiRouter.use('/users', controller(UsersController));
+  apiRouter.use('/refuelings', controller(RefuelingsController));
 
   router.use('/api', apiRouter);
 

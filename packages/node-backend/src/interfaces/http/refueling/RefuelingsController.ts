@@ -1,8 +1,9 @@
-const { Router } = require('express');
-const { inject } = require('awilix-express');
-const Status = require('http-status');
+import { Router } from 'express';
+import { inject } from 'awilix-express';
+import Status from 'http-status';
+import { RestController } from '../../types';
 
-const RefuelingsController = {
+const RefuelingsController: RestController = {
   get router() {
     const router = Router();
 
@@ -126,4 +127,4 @@ const RefuelingsController = {
   }),
 };
 
-module.exports = RefuelingsController;
+export default RefuelingsController;

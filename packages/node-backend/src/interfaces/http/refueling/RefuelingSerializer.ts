@@ -24,4 +24,4 @@ const RefuelingSerializer = {
   },
 };
 
-module.exports = RefuelingSerializer;
+export default RefuelingSerializer;

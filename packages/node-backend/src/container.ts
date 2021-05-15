@@ -14,7 +14,7 @@ import { Logger } from 'log4js';
 import config from '../config';
 import { Config } from '../config';
 
-import { IErrorFactory, infraErrorFactory } from './app/utils/errors/utils';
+import { infraErrorFactory } from './app/utils/errors/utils';
 
 import Application from './app/Application';
 import {
@@ -55,9 +55,6 @@ import { Model, Sequelize } from 'sequelize/types';
 // TODO refine to be more type safe
 const UserModel = SequelizeModels.User;
 const RefuelingModel = SequelizeModels.Refueling;
-
-const test = asFunction(infraErrorFactory);
-type t = typeof test;
 
 export interface ICradle {
   // System
@@ -103,7 +100,6 @@ export interface ICradle {
 }
 
 const container = createContainer<ICradle>({
-  // const container = createContainer({
   injectionMode: InjectionMode.PROXY,
   // injectionMode: InjectionMode.CLASSIC,
 });
