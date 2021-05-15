@@ -1,4 +1,5 @@
-'use strict';
+import Sequelize, { QueryInterface } from 'sequelize';
+import { Migration } from '../types';
 
 /**
  * In this version, the new column {madeAt} was added.
@@ -9,8 +10,8 @@
  * 3. Update the column, set allowNull = false
  */
 
-module.exports = {
-  up: function (queryInterface, Sequelize) {
+const migration: Migration = {
+  up: function(queryInterface) {
     return Promise.all([
       queryInterface
         .addColumn('refuelings', 'madeAt', {
@@ -18,7 +19,7 @@ module.exports = {
           type: Sequelize.DATE,
           defaultValue: new Date(),
         })
-        .then(function () {
+        .then(function() {
           console.log('created column madeAt');
           queryInterface.sequelize.query(
             'UPDATE refuelings SET "madeAt" = :current_date',
@@ -28,18 +29,20 @@ module.exports = {
             }
           );
         })
-        .then(function () {
+        .then(function() {
           queryInterface.changeColumn('refuelings', 'madeAt', {
             type: Sequelize.DATE,
             allowNull: false,
           });
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         }),
     ]);
   },
-  down: function (queryInterface) {
+  down: function(queryInterface) {
     return Promise.all([queryInterface.removeColumn('refuelings', 'madeAt')]);
   },
 };
+
+export default migration;

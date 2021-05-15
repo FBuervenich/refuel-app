@@ -1,9 +1,8 @@
-'use strict';
+import dataFaker from '../../support/dataFaker';
+import { Seed } from '../types';
 
-const dataFaker = require('src/infra/support/dataFaker');
-
-module.exports = {
-  up: function (queryInterface) {
+const seed: Seed = {
+  up: async queryInterface => {
     const testUsers = [];
 
     for (let i = 0; i < 50; i++) {
@@ -17,7 +16,9 @@ module.exports = {
     return queryInterface.bulkInsert('users', testUsers, {});
   },
 
-  down: function (queryInterface) {
+  down: async queryInterface => {
     return queryInterface.bulkDelete('users', null, {});
   },
 };
+
+export default seed;

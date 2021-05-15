@@ -10,11 +10,7 @@ class GetAllRefuelings extends Operation {
     this.refuelingsRepository = refuelingsRepository;
   }
 
-  /**
-   *
-   * @param {string | undefined} userId
-   */
-  async execute(userId) {
+  async execute(userId: string | undefined) {
     const { SUCCESS, ERROR } = this.outputs;
 
     const args: Dictionary<TodoAny> = {

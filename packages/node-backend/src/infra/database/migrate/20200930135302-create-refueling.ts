@@ -1,7 +1,8 @@
-'use strict';
+import Sequelize from 'sequelize';
+import { Migration } from '../types';
 
-module.exports = {
-  up: function (queryInterface, Sequelize) {
+const migration: Migration = {
+  up: function(queryInterface) {
     return queryInterface.createTable('refuelings', {
       id: {
         allowNull: false,
@@ -35,7 +36,9 @@ module.exports = {
       },
     });
   },
-  down: function (queryInterface) {
+  down: function(queryInterface) {
     return queryInterface.dropTable('refuelings');
   },
 };
+
+export default migration;

@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-module.exports = {
+const FactoriesLoader = {
   load({ factoryGirl, baseFolder, models }) {
     fs.readdirSync(baseFolder)
       .filter(file => {
@@ -18,3 +18,5 @@ module.exports = {
     return factoryGirl;
   },
 };
+
+export default FactoriesLoader;

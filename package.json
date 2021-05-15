@@ -6,9 +6,13 @@
     "packages/*"
   ],
   "scripts": {
-    "serve-frontend": "yarn workspace vue-frontend serve",
-    "serve-backend": "yarn workspace node-backend dev",
-    "serve-stack": "concurrently -k --kill-others-on-fail -p \"[{name}]\" -n \"Frontend,Backend\" -c \"#42b883.bold,#68a063.bold\" \"yarn serve-frontend\" \"yarn serve-backend\""
+    "serve-stack": "concurrently -k --kill-others-on-fail -p \"[{name}]\" -n \"Frontend,Backend\" -c \"#42b883.bold,#68a063.bold\" \"yarn serve-frontend\" \"yarn serve-backend\"",
+    " --- FRONTEND --- ": "",
+    "fronted:build": "yarn workspace vue-frontend build",
+    "frontend:serve": "yarn workspace vue-frontend serve",
+    " --- BACKEND --- ": "",
+    "backend:build": "yarn workspace node-backend build",
+    "backend:serve": "yarn workspace node-backend dev"
   },
   "repository": "https://github.com/FBuervenich/basic-refuel-app",
   "author": "Florentin Bürvenich <florentin@familie-buervenich.de>",

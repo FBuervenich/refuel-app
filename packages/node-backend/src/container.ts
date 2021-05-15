@@ -14,7 +14,7 @@ import { Logger } from 'log4js';
 import config from '../config';
 import { Config } from '../config';
 
-import { infraErrorFactory } from './app/utils/errors/utils';
+import { IErrorFactory, infraErrorFactory } from './app/utils/errors/utils';
 
 import Application from './app/Application';
 import {
@@ -56,7 +56,8 @@ import { Model, Sequelize } from 'sequelize/types';
 const UserModel = SequelizeModels.User;
 const RefuelingModel = SequelizeModels.Refueling;
 
-type test = typeof asFunction;
+const test = asFunction(infraErrorFactory);
+type t = typeof test;
 
 export interface ICradle {
   // System
@@ -65,9 +66,7 @@ export interface ICradle {
   router: Router;
   logger: Logger;
   config: Config;
-  infraErrorFactory: ReturnType<typeof asFunction>;
-  // infraErrorFactory: BuildResolver<infraErrorFactoryReturnType> &
-  //   DisposableResolver<infraErrorFactoryReturnType>;
+  infraErrorFactory: ReturnType<typeof infraErrorFactory>;
 
   // Middlewares
   loggerMiddleware: ReturnType<typeof loggerMiddleware>;

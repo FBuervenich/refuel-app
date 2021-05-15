@@ -1,9 +1,8 @@
-'use strict';
+import random from 'random';
+import { Seed } from '../types';
 
-const random = require('random');
-
-module.exports = {
-  up: function(queryInterface) {
+const seed: Seed = {
+  up: async queryInterface => {
     // maximum amount of deviation from the curre
     const maxTimeDeviationFromCurrentInSeconds = 60 * 60 * 24 * 365; // 1 year max. deviation
     const currentDate = new Date();
@@ -41,7 +40,9 @@ module.exports = {
     return queryInterface.bulkInsert('refuelings', testRefuelings, {});
   },
 
-  down: function(queryInterface) {
+  down: async queryInterface => {
     return queryInterface.bulkDelete('refuelings', null, {});
   },
 };
+
+export default seed;

@@ -6,13 +6,10 @@
     "allowJs": true,
     "target": "ESNext",
     "declaration": true /* Generates corresponding '.d.ts' file. */,
+    "declarationDir": "./dist/types",
     "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
     "sourceMap": true,
     "resolveJsonModule": true,
-    // "baseUrl": "./",
-    // "paths": {
-    //   "@/*": ["./src/*"]
-    // },
     "esModuleInterop": true,
     "skipLibCheck": true
   },
