@@ -46,6 +46,7 @@ class SequelizeRefuelingsRepository {
     if (refuelingResult.isErr()) {
       return refuelingResult;
     }
+
     await refuelingResult.value.destroy();
     return ok(id);
   }
@@ -97,7 +98,10 @@ class SequelizeRefuelingsRepository {
 
   async _getById(id): Promise<Result<TodoAny, RepositoryError>> {
     try {
-      return await this.RefuelingModel.findByPk(id, { rejectOnEmpty: true });
+      const result = await this.RefuelingModel.findByPk(id, {
+        rejectOnEmpty: true,
+      });
+      return ok(result);
     } catch (e) {
       if (e.name === 'SequelizeEmptyResultError') {
         const error: RepositoryError = {
