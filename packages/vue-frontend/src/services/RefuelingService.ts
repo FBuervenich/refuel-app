@@ -1,11 +1,15 @@
 import { Refueling } from '@/store/models';
+import { PaginationSettings } from '@/store/modules/types';
 import apiClient from '@/util/api';
 import { ApiV1NewRefuelingRequest } from '../../../common/types/ApiV1Types';
 
 export default {
-  async getRefuelings(): Promise<Refueling[]> {
-    const response = await apiClient.get<Refueling[]>('refuelings');
-    return response.data;
+  async getRefuelings(pagination?: PaginationSettings): Promise<Refueling[]> {
+    const params = {
+      params: pagination,
+    };
+    const response = await apiClient.get('refuelings', params);
+    return response.data as Refueling[];
   },
   getRefueling(id: number) {
     return apiClient.get('refuelings/' + id);

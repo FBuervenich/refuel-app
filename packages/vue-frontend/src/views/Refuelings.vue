@@ -1,7 +1,10 @@
 <template>
   <div id="wrapper">
     <h2>Refuelings</h2>
-    <RefuelingsTable :refuelings="refuelings" />
+    <RefuelingsTable
+      @pagination-changed="triggerDataLoading"
+      :refuelings="refuelings"
+    />
   </div>
 </template>
 
@@ -10,11 +13,18 @@ import RefuelingsTable from '@/components/widgets/RefuelingsTable.vue';
 
 import { computed, defineComponent } from 'vue';
 import { RefuelingsModule } from '@/store';
+import { PaginationSettings } from '@/store/modules/types';
 
 export default defineComponent({
   name: 'Refuelings',
   components: {
     RefuelingsTable,
+  },
+
+  methods: {
+    async triggerDataLoading(settings: PaginationSettings) {
+      await RefuelingsModule.fetchAll(settings);
+    },
   },
 
   async setup() {
@@ -25,8 +35,8 @@ export default defineComponent({
       refuelings,
     };
 
-    function loadData() {
-      return RefuelingsModule.fetchAll();
+    async function loadData() {
+      return await RefuelingsModule.fetchAll();
     }
   },
 });
