@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { Options } from 'sequelize/types';
+import { Options } from 'sequelize';
 import { Configuration } from 'log4js';
 
 require('dotenv').config();
@@ -31,6 +31,7 @@ const config = Object.assign(
 );
 
 export default config;
+export type Config = typeof config;
 
 /** Loads the database config - either a config object or a db connection string. */
 function loadDbConfig(): Options | string {

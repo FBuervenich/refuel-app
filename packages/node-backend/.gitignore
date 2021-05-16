@@ -5,7 +5,7 @@
 node_modules/
 
 # Project specific
-config/database.ts
+config/database.js
 
 # Typescript output
 dist/

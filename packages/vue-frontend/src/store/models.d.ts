@@ -1,3 +1,4 @@
+// TODO move to shared-package
 export interface Refueling {
   id: number;
   litres: number;

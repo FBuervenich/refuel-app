@@ -21,10 +21,21 @@ export default class Refuelings extends VuexModule {
     this.refuelings.push(refueling);
   }
 
+  @Mutation
+  removeRefueling(id: number) {
+    this.refuelings = this.refuelings.filter(refueling => refueling.id !== id);
+  }
+
   @Action({ commit: 'addRefueling' })
   async createRefueling(refueling: Refueling) {
     const newRefueling = await RefuelingService.postRefueling(refueling);
     return newRefueling.data;
+  }
+
+  @Action({ commit: 'removeRefueling' })
+  async deleteRefueling(id: number) {
+    await RefuelingService.deleteRefueling(id);
+    return id;
   }
 
   @MutationAction

@@ -1,13 +1,11 @@
 const { expect } = require('chai');
-const Operation = require('src/app/Operation');
+const Operation = require('../../../app/Operation');
 
 describe('App :: Operation', () => {
   var CustomOperation;
 
   beforeEach(() => {
-    CustomOperation = class CustomOperation extends Operation {
-
-    };
+    CustomOperation = class CustomOperation extends Operation {};
 
     CustomOperation.setOutputs(['SUCCESS']);
   });
@@ -29,7 +27,10 @@ describe('App :: Operation', () => {
 
         expect(() => {
           operation.on('INVALID', () => {});
-        }).to.throw(Error, /Invalid output "INVALID" to operation CustomOperation/);
+        }).to.throw(
+          Error,
+          /Invalid output "INVALID" to operation CustomOperation/
+        );
       });
     });
   });

@@ -6,7 +6,7 @@ const APP_NAME = 'Refuel app';
 
 const isProdEnv = process.env.NODE_ENV === 'production';
 const isDevEnv = process.env.NODE_ENV === 'development';
-const publicPath = isProdEnv ? '/' : '/vuewebapp/';
+const publicPath = isProdEnv ? '/' : '/';
 
 // vue.config.js
 module.exports = {
@@ -19,6 +19,7 @@ module.exports = {
         logLevel: 'debug',
       },
     },
+    disableHostCheck: true,
   },
   transpileDependencies: ['vuex-module-decorators'],
 

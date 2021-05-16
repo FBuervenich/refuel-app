@@ -6,14 +6,21 @@
     "packages/*"
   ],
   "scripts": {
-    "serve-frontend": "yarn workspace vue-frontend serve",
-    "serve-backend": "yarn workspace node-backend dev",
-    "serve-stack": "concurrently --kill-others-on-fail \"yarn vue-frontend\" \"yarn node-backend\""
+    "serve-stack": "concurrently -k --kill-others-on-fail -p \"[{name}]\" -n \"Frontend,Backend\" -c \"#42b883.bold,#68a063.bold\" \"yarn serve-frontend\" \"yarn serve-backend\"",
+    " --- FRONTEND --- ": "",
+    "fronted:build": "yarn workspace vue-frontend build",
+    "frontend:serve": "yarn workspace vue-frontend serve",
+    " --- BACKEND --- ": "",
+    "backend:build": "yarn workspace node-backend build",
+    "backend:serve": "yarn workspace node-backend dev",
+    " --- HEROKU --- ": "",
+    "heroku-postbuild": "bash ./scripts/heroku.build"
   },
   "repository": "https://github.com/FBuervenich/basic-refuel-app",
   "author": "Florentin Bürvenich <florentin@familie-buervenich.de>",
   "dependencies": {
-    "concurrently": "^6.0.1"
+    "concurrently": "^6.0.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^7.14.0",
