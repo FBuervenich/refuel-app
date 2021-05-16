@@ -14,7 +14,7 @@
     "backend:build": "yarn workspace node-backend build",
     "backend:serve": "yarn workspace node-backend dev",
     " --- HEROKU --- ": "",
-    "heroku-postbuild": "./scripts/heroku.build"
+    "heroku-postbuild": "bash ./scripts/heroku.build"
   },
   "repository": "https://github.com/FBuervenich/basic-refuel-app",
   "author": "Florentin Bürvenich <florentin@familie-buervenich.de>",
