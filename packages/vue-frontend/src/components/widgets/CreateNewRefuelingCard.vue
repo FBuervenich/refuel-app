@@ -49,7 +49,7 @@
               type="date"
               placeholder="Pick a date"
               v-model="formData.date"
-              style="width: 100%;"
+              style="width: 100%"
             ></el-date-picker>
           </el-col>
         </el-form-item>
@@ -95,9 +95,9 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs, watch } from 'vue';
 
-import { Refueling } from '@/store/models';
 import { RefuelingsModule } from '@/store';
 import { SuccessMessage } from '@/util/messages';
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 
 export default defineComponent({
   props: {
@@ -179,7 +179,7 @@ export default defineComponent({
         totalKilometers: formDataV.totalKilometers || 0,
         dayKilometers: formDataV.dayKilometers || 0,
         fullTank: formDataV.fullTank,
-        madeAt: formDataV.date || new Date(),
+        madeAt: formDataV.date.toISOString() || new Date().toISOString(),
       };
 
       await RefuelingsModule.createRefueling(refueling);

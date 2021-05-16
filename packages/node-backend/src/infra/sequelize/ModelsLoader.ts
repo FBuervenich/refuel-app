@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Dictionary } from 'lodash';
 import path from 'path';
 import { Model, Sequelize } from 'sequelize';
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 
 const ModelsLoader = {
   load({
@@ -17,14 +17,14 @@ const ModelsLoader = {
     const loaded: Dictionary<Model> = {};
 
     fs.readdirSync(baseFolder)
-      .filter(file => {
+      .filter((file) => {
         return (
           file.indexOf('.') !== 0 &&
           file !== indexFile &&
           file.slice(-3) === '.js'
         );
       })
-      .forEach(file => {
+      .forEach((file) => {
         const model = require(path.join(baseFolder, file)).default(sequelize);
         loaded[model.name] = model;
       });

@@ -1,7 +1,7 @@
-import { Refueling } from '@/store/models';
 import { PaginationSettings } from '@/store/modules/types';
 import apiClient from '@/util/api';
-import { ApiV1NewRefuelingRequest } from '../../../common/types/ApiV1Types';
+import { ApiV1NewRefuelingRequest } from '@ra/common/dist/types/ApiV1Types';
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 
 export default {
   async getRefuelings(pagination?: PaginationSettings): Promise<Refueling[]> {

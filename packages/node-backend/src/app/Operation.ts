@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 import { Dictionary } from 'lodash';
-import { TodoAny } from '../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 const define = Object.defineProperty;
 
 class Operation extends EventEmitter {

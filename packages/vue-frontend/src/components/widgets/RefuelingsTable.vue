@@ -40,8 +40,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
-import { Refueling } from '@/store/models';
 import { RefuelingsModule } from '@/store';
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 
 export default defineComponent({
   name: 'RefuelingsTable',
@@ -70,7 +70,7 @@ export default defineComponent({
 
   setup(props) {
     const beautifiedRefuelings = computed(() =>
-      props.refuelings.map(refueling => ({
+      props.refuelings.map((refueling: Refueling) => ({
         id: refueling.id,
         madeAt: refueling.madeAt,
         litres: refueling.litres?.toFixed(2) + 'l',

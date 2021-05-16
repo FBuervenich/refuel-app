@@ -1,5 +1,5 @@
 import Operation from '../Operation';
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import User from '../../domain/user/User';
 
 class CreateUser extends Operation {

@@ -29,6 +29,7 @@
   "author": "Florentin Bürvenich",
   "license": "MIT",
   "dependencies": {
+    "@ra/common": "0.1.0",
     "awilix": "^4.2.6",
     "awilix-express": "^4.0.0",
     "body-parser": "^1.17.1",

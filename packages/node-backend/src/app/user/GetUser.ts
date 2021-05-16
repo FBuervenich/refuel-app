@@ -1,6 +1,6 @@
 import Operation from '../Operation';
 
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 
 class GetUser extends Operation {
   usersRepository: TodoAny;

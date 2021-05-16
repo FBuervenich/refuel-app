@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
   }
 }

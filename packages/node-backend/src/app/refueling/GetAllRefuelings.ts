@@ -1,5 +1,5 @@
 import { Dictionary } from 'lodash';
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import Operation from '../Operation';
 
 class GetAllRefuelings extends Operation {

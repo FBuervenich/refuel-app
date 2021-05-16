@@ -1,14 +1,26 @@
 {
-  "name": "common",
+  "name": "@ra/common",
   "version": "0.1.0",
   "description": "Common code, shared by multiple packages in the repo",
   "private": true,
+  "config": {
+    "schemas-buildOptions": ""
+  },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w"
+    "build": "npm run schemas:build && npm run src:build",
+    "watch": "concurrently -k --kill-others-on-fail -p \"[{name}]\" -n \"schemas,src\" -c \"#001427,#00a9a5\" \"npm run schemas:watch\" \"npm run src:watch\"",
+    "src:build": "tsc",
+    "src:watch": "tsc -w",
+    "schemas:build-legacy": "npm run schemas:delete && json2ts --ignoreMinAndMaxItems=true -strictIndexSignatures -i 'src/schemas/**/*.schema.json' -o src/interfaces/",
+    "schemas:build": "node ./build-scripts/build-schemas.js src/schemas src/interfaces",
+    "schemas:watch": "nodemon -e .schema.json --watch src/schemas --exec \"npm run schemas:build\"",
+    "schemas:delete": "rimraf ./src/interfaces/**/*.schema.d.ts"
   },
   "dependencies": {
     "lodash": "^4.17.21"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "json-schema-to-typescript": "^10.1.4"
+  }
 }

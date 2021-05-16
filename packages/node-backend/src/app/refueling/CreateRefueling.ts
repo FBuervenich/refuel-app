@@ -1,4 +1,4 @@
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import Refueling from '../../domain/refueling/Refueling';
 import Operation from '../Operation';
 

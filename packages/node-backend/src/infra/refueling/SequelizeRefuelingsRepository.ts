@@ -1,6 +1,6 @@
 import { RepositoryError } from '../../app/utils/errors/types';
 import { err, ok, Result } from 'neverthrow';
-import { TodoAny } from '../../../../common/types/ToDoTypes';
+import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import RefuelingMapper from './SequelizeRefuelingMapper';
 
 class SequelizeRefuelingsRepository {
@@ -16,7 +16,7 @@ class SequelizeRefuelingsRepository {
     return refuelings.map(RefuelingMapper.toEntity);
   }
 
-  async getById(id) {
+  async getById(id: number) {
     const refueling = await this._getById(id);
 
     return RefuelingMapper.toEntity(refueling);

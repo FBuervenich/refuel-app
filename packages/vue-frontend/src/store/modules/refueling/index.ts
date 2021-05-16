@@ -6,7 +6,8 @@ import {
   Action,
   MutationAction,
 } from 'vuex-module-decorators';
-import { Refueling } from '../../models';
+import { PaginationSettings } from '../types';
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 
 @Module({ name: 'refueling' })
 export default class Refuelings extends VuexModule {
@@ -23,7 +24,9 @@ export default class Refuelings extends VuexModule {
 
   @Mutation
   removeRefueling(id: number) {
-    this.refuelings = this.refuelings.filter(refueling => refueling.id !== id);
+    this.refuelings = this.refuelings.filter(
+      (refueling) => refueling.id !== id
+    );
   }
 
   @Action({ commit: 'addRefueling' })
@@ -39,8 +42,10 @@ export default class Refuelings extends VuexModule {
   }
 
   @MutationAction
-  async fetchAll() {
-    const refuelings: Refueling[] = await RefuelingService.getRefuelings();
+  async fetchAll(pagination?: PaginationSettings) {
+    const refuelings: Refueling[] = await RefuelingService.getRefuelings(
+      pagination
+    );
     return { refuelings };
   }
 }

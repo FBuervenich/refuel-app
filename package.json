@@ -13,13 +13,16 @@
     " --- BACKEND --- ": "",
     "backend:build": "yarn workspace node-backend build",
     "backend:serve": "yarn workspace node-backend dev",
+    " --- COMMON --- ": "",
+    "common:build": "yarn workspace @ra/common build",
+    "common:serve": "yarn workspace @ra/common serve",
     " --- HEROKU --- ": "",
     "heroku-postbuild": "bash ./scripts/heroku.build"
   },
   "repository": "https://github.com/FBuervenich/basic-refuel-app",
   "author": "Florentin Bürvenich <florentin@familie-buervenich.de>",
   "dependencies": {
-    "concurrently": "^6.0.1",
+    "concurrently": "^6.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
