@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://schemas.refuel-app.fbuervenich.de/types/Refueling.schema.json",
-
   "title": "Refueling",
   "type": "object",
   "required": ["id", "litres", "price", "pricePerLitre", "madeAt"],
@@ -13,7 +12,8 @@
     "totalKilometers": { "type": "number" },
     "dayKilometers": { "type": "number" },
     "fullTank": { "type": "boolean" },
-    "madeAt": { "type": "string", "format": "date-time" }
+    "madeAt": { "type": "string", "format": "date-time" },
+    "userId": { "type": "string" }
   },
   "additionalProperties": false
 }

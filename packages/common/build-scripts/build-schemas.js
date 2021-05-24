@@ -1,6 +1,7 @@
 const json2ts = require('json-schema-to-typescript');
 const fs = require('fs');
 const path = require('path');
+const mkdirpsync = require('mkdirpsync');
 
 const outPath = [];
 
@@ -37,7 +38,8 @@ function buildSchemas(baseDir, dir) {
           const outName = path.join(outFolder, name + '.schema.ts');
           console.log('Generated content for', outName, ', writing to file...');
           if (!fs.existsSync(outFolder)) {
-            fs.mkdirSync(outFolder);
+            console.log(`generating missing (sub)folder(s) ${outFolder}}`);
+            mkdirpsync(outFolder);
           }
           fs.writeFileSync(outName, ts);
         })

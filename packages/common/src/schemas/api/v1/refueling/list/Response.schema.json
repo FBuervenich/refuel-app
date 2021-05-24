@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.refuel-app.fbuervenich.de/schemas/api/v1/refueling/list/Response.schema.json",
+  "title": "ApiV1RefuelingListResponse",
+  "type": "object",
+  "required": ["refuelings"],
+  "properties": {
+    "refuelings": {
+      "type": "array",
+      "items": { "$ref": "../../../../types/Refueling.schema.json" }
+    }
+  },
+  "additionalProperties": false
+}

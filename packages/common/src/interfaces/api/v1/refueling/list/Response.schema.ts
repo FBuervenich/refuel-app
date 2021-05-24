@@ -5,6 +5,9 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export interface ApiV1RefuelingListResponse {
+  refuelings: Refueling[];
+}
 export interface Refueling {
   id: number;
   litres: number;

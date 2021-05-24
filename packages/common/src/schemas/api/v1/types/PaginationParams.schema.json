@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.refuel-app.fbuervenich.de/api/v1/types/PaginationParams.schema.json",
+  "title": "ApiV0TypesPaginationParams",
+  "description": "Params for an offset-based pagination.",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": ["string", "null"],
+      "description": "list items startint at (but not including) the given item. Pass `null` to list from the beginning",
+      "default": null
+    },
+    "limit": {
+      "type": ["integer", "null"],
+      "description": "How many results to fetch at most. Set to `null` to retrieve all items",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 500
+    }
+  }
+}

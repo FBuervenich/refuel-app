@@ -15,7 +15,7 @@
     "backend:serve": "yarn workspace node-backend dev",
     " --- COMMON --- ": "",
     "common:build": "yarn workspace @ra/common build",
-    "common:serve": "yarn workspace @ra/common serve",
+    "common:serve": "yarn workspace @ra/common watch",
     " --- HEROKU --- ": "",
     "heroku-postbuild": "bash ./scripts/heroku.build"
   },

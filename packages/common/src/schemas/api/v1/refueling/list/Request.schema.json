@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.refuel-app.fbuervenich.de/schemas/api/v1/refueling/list/Request.schema.json",
+  "title": "ApiV1RefuelingListRequest",
+  "type": "object",
+  "required": ["pagination"],
+  "properties": {
+    "pagination": { "$ref": "../../types/PaginationParams.schema.json" },
+    "orderBy": {},
+    "filter": {}
+  },
+  "additionalProperties": false
+}

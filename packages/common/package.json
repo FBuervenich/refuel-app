@@ -17,10 +17,12 @@
     "schemas:delete": "rimraf ./src/interfaces/**/*.schema.d.ts"
   },
   "dependencies": {
+    "ajv": "^8.5.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
-    "json-schema-to-typescript": "^10.1.4"
+    "json-schema-to-typescript": "^10.1.4",
+    "mkdirpsync": "^0.1.0"
   }
 }

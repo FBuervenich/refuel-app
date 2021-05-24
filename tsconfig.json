@@ -4,6 +4,8 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true
   }
 }
