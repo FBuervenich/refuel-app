@@ -1,4 +1,4 @@
-class Refueling implements Refueling {
+class Refueling {
   id: number;
   litres: number;
   price: number;
