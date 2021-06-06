@@ -1,5 +1,4 @@
 import Operation from '../Operation';
-
 import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 
 class UpdateUser extends Operation {

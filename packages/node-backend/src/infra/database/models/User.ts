@@ -1,18 +1,19 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { User as UserAttributes } from '@ra/common/dist/interfaces/types/User.schema';
 
-// TODO move to /domain/refueling
-interface UserAttributes {
-  id: number;
-  name: string;
-}
+export interface UserCreationAttributes
+  extends Optional<UserAttributes, 'id'> {}
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+export class UserModelType extends Model<
+  UserAttributes,
+  UserCreationAttributes
+> {}
 
-const UserModel = function(sequelize: Sequelize) {
-  class User extends Model<UserAttributes, UserCreationAttributes>
-    implements UserAttributes {
+const UserModel = function (sequelize: Sequelize) {
+  class User extends UserModelType implements UserAttributes {
     public id!: number;
-    public name: string;
+    public name!: string;
+    public age!: number;
   }
 
   return User.init(
@@ -23,6 +24,7 @@ const UserModel = function(sequelize: Sequelize) {
         primaryKey: true,
       },
       name: DataTypes.STRING,
+      age: DataTypes.NUMBER,
     },
     {
       sequelize,

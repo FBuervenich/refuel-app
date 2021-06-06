@@ -3,6 +3,8 @@ import cors from 'cors';
 import { Config } from '../../../config';
 import { Logger } from 'log4js';
 
+const FALLBACK_PORT = 3000;
+
 export default class Server {
   private config: Config;
   private logger: Logger;
@@ -21,9 +23,9 @@ export default class Server {
   }
 
   start() {
-    return new Promise<void>(resolve => {
-      const http = this.express.listen(this.config.web.port, () => {
-        const port = http.address()['port'] ?? 3000;
+    return new Promise<void>((resolve) => {
+      const port = this.config.web?.port ?? FALLBACK_PORT;
+      const http = this.express.listen(port, () => {
         this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
         resolve();
       });

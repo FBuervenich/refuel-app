@@ -1,7 +1,8 @@
-import Refueling from '../../domain/refueling/Refueling';
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
+import { RefuelingModelType } from '../database/models/Refueling';
 
 const SequelizeRefuelingMapper = {
-  toEntity(dbSurvivor) {
+  toEntity(dbSurvivor: RefuelingModelType) {
     const {
       id,
       litres,
@@ -14,7 +15,7 @@ const SequelizeRefuelingMapper = {
       userId,
     } = dbSurvivor.get({ plain: true });
 
-    return new Refueling({
+    const refueling: Refueling = {
       id,
       litres,
       price,
@@ -24,10 +25,11 @@ const SequelizeRefuelingMapper = {
       fullTank,
       madeAt,
       userId,
-    });
+    };
+    return refueling;
   },
 
-  toDatabase(survivor) {
+  toDatabase(survivor: Refueling) {
     const {
       litres,
       price,

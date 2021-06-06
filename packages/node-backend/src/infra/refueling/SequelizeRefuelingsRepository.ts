@@ -2,9 +2,11 @@ import { RepositoryError } from '../../app/utils/errors/types';
 import { err, ok, Result } from 'neverthrow';
 import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import RefuelingMapper from './SequelizeRefuelingMapper';
+import { Model } from 'sequelize';
+import { RefuelingModelType } from '../database/models/Refueling';
 
 class SequelizeRefuelingsRepository {
-  private RefuelingModel: TodoAny;
+  private RefuelingModel: typeof RefuelingModelType;
 
   constructor({ RefuelingModel }) {
     this.RefuelingModel = RefuelingModel;
@@ -16,10 +18,15 @@ class SequelizeRefuelingsRepository {
     return refuelings.map(RefuelingMapper.toEntity);
   }
 
-  async getById(id: number) {
-    const refueling = await this._getById(id);
+  async getById(id: number): Promise<Result<TodoAny, RepositoryError>> {
+    const refuelingResult = await this._getById(id);
 
-    return RefuelingMapper.toEntity(refueling);
+    if (refuelingResult.isErr()) {
+      return err(refuelingResult.error);
+    }
+
+    const refuelingEntity = RefuelingMapper.toEntity(refuelingResult.value);
+    return ok(refuelingEntity);
   }
 
   async add(refueling): Promise<Result<TodoAny, RepositoryError>> {
@@ -37,7 +44,7 @@ class SequelizeRefuelingsRepository {
     const newRefueling = await this.RefuelingModel.create(
       RefuelingMapper.toDatabase(refueling)
     );
-    return RefuelingMapper.toEntity(newRefueling);
+    return ok(RefuelingMapper.toEntity(newRefueling));
   }
 
   async remove(id): Promise<Result<TodoAny, RepositoryError>> {
@@ -60,21 +67,19 @@ class SequelizeRefuelingsRepository {
 
     const refueling = refuelingResult.value;
 
-    const transaction = await this.RefuelingModel.sequelize.transaction();
+    const transaction = await this.RefuelingModel.sequelize?.transaction();
+
+    if (!transaction) {
+      const error: RepositoryError = {
+        message: 'Error',
+        details: { error: 'Could not create transaction for update' },
+      };
+      return err(error);
+    }
 
     try {
       const updatedRefueling = await refueling.update(newData, { transaction });
       const refuelingEntity = RefuelingMapper.toEntity(updatedRefueling);
-
-      const { valid, errors } = refuelingEntity.validate();
-
-      if (!valid) {
-        const error: RepositoryError = {
-          message: 'ValidationError',
-          details: errors,
-        };
-        return err(error);
-      }
 
       await transaction.commit();
 

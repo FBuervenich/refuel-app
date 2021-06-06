@@ -1,13 +1,17 @@
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 import random from 'random';
+import { WithSequelizeTimestamps } from '../../../types/Sequelize';
+import { RefuelingCreationAttributes } from '../models/Refueling';
 import { Seed } from '../types';
 
 const seed: Seed = {
-  up: async queryInterface => {
+  up: async (queryInterface) => {
     // maximum amount of deviation from the curre
     const maxTimeDeviationFromCurrentInSeconds = 60 * 60 * 24 * 365; // 1 year max. deviation
     const currentDate = new Date();
 
-    const testRefuelings = [];
+    const testRefuelings: WithSequelizeTimestamps<RefuelingCreationAttributes>[] =
+      [];
 
     for (let i = 0; i < 50; i++) {
       const litres = random.float(0, 100);
@@ -40,8 +44,8 @@ const seed: Seed = {
     return queryInterface.bulkInsert('refuelings', testRefuelings, {});
   },
 
-  down: async queryInterface => {
-    return queryInterface.bulkDelete('refuelings', null, {});
+  down: async (queryInterface) => {
+    return queryInterface.bulkDelete('refuelings', {}, {});
   },
 };
 

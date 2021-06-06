@@ -42,4 +42,5 @@ function loadDbConfig(): Options | string {
   if (fs.existsSync(path.join(__dirname, './database.js'))) {
     return require('./database')[ENV];
   }
+  return '';
 }

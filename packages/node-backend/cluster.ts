@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import pm2 from 'pm2';
 
-const instances = parseInt(process.env.WEB_CONCURRENCY) || -1;
+const instances = process.env.WEB_CONCURRENCY
+  ? parseInt(process.env.WEB_CONCURRENCY)
+  : -1;
 const maxMemory = process.env.WEB_MEMORY || 512;
 
 pm2.connect(() => {
@@ -15,7 +17,7 @@ pm2.connect(() => {
         NODE_PATH: '.',
       },
     },
-    err => {
+    (err) => {
       if (err) {
         return console.error(
           'Error while launching applications',
@@ -28,11 +30,11 @@ pm2.connect(() => {
       pm2.launchBus((err, bus) => {
         console.log('[PM2] Log streaming started');
 
-        bus.on('log:out', packet => {
+        bus.on('log:out', (packet) => {
           console.log('[App:%s] %s', packet.process.name, packet.data);
         });
 
-        bus.on('log:err', packet => {
+        bus.on('log:err', (packet) => {
           console.error('[App:%s][Err] %s', packet.process.name, packet.data);
         });
       });

@@ -1,5 +1,5 @@
+import { Refueling } from '@ra/common/dist/interfaces/types/Refueling.schema';
 import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
-import Refueling from '../../domain/refueling/Refueling';
 import Operation from '../Operation';
 
 class CreateRefueling extends Operation {
@@ -13,7 +13,7 @@ class CreateRefueling extends Operation {
   async execute(refuelingData, userId) {
     const { SUCCESS, ERROR, VALIDATION_ERROR } = this.outputs;
 
-    const refueling = new Refueling({ ...refuelingData, userId });
+    const refueling: Refueling = { ...refuelingData, userId };
 
     try {
       const newRefueling = await this.refuelingsRepository.add(refueling);

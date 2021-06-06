@@ -13,9 +13,9 @@ export interface Refueling {
   litres: number;
   price: number;
   pricePerLitre: number;
-  totalKilometers?: number;
-  dayKilometers?: number;
-  fullTank?: boolean;
-  madeAt: string;
+  totalKilometers: number | null;
+  dayKilometers: number | null;
+  fullTank: boolean | null;
+  madeAt: Date;
   userId?: string;
 }

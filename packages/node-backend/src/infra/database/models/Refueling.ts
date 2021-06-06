@@ -1,35 +1,27 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { Refueling as RefuelingAttributes } from '@ra/common/dist/interfaces/types/Refueling.schema';
 
-// TODO move to /domain/refueling
-interface RefuelingAttributes {
-  id: number;
-  litres: number;
-  price: number;
-  pricePerLitre: number;
-  totalKilometers: number;
-  dayKilometers: number;
-  fullTank: boolean;
-  madeAt: Date;
-  userId: string;
-}
-
-interface RefuelingCreationAttributes
+export interface RefuelingCreationAttributes
   extends Optional<RefuelingAttributes, 'id'> {}
 
-const RefuelingsModel = function(sequelize: Sequelize) {
-  class Refueling
-    extends Model<RefuelingAttributes, RefuelingCreationAttributes>
-    implements RefuelingAttributes {
+export class RefuelingModelType extends Model<
+  RefuelingAttributes,
+  RefuelingCreationAttributes
+> {}
+
+const RefuelingsModel = function (sequelize: Sequelize) {
+  class Refueling extends RefuelingModelType implements RefuelingAttributes {
     public id!: number;
     public litres!: number;
     public price!: number;
     public pricePerLitre!: number;
     public totalKilometers!: number | null;
     public dayKilometers!: number | null;
-    public fullTank!: boolean;
+    public fullTank!: boolean | null;
     public madeAt!: Date;
     public userId!: string;
   }
+
   return Refueling.init(
     {
       id: {
@@ -59,7 +51,7 @@ const RefuelingsModel = function(sequelize: Sequelize) {
       },
       fullTank: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
       madeAt: {
         type: DataTypes.DATE,

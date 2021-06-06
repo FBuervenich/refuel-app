@@ -51,6 +51,7 @@ import SequelizeRefuelingsRepository from './infra/refueling/SequelizeRefuelings
 
 import { database, SequelizeModels } from './infra/database/models';
 import { Model, Sequelize } from 'sequelize/types';
+import { RefuelingModelType } from './infra/database/models/Refueling';
 
 // TODO refine to be more type safe
 const UserModel = SequelizeModels.User;
@@ -79,7 +80,7 @@ export interface ICradle {
   // Database
   database: Sequelize;
   UserModel: Model;
-  RefuelingModel: Model;
+  RefuelingModel: RefuelingModelType;
 
   // Operations
   createUser: InstanceType<typeof CreateUser>;

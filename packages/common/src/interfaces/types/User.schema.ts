@@ -5,14 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Refueling {
+export interface User {
   id: number;
-  litres: number;
-  price: number;
-  pricePerLitre: number;
-  totalKilometers: number | null;
-  dayKilometers: number | null;
-  fullTank: boolean | null;
-  madeAt: Date;
-  userId?: string;
+  name: string;
+  age: number;
 }
