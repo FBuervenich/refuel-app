@@ -2,7 +2,6 @@ import { RepositoryError } from '../../app/utils/errors/types';
 import { err, ok, Result } from 'neverthrow';
 import { TodoAny } from '@ra/common/dist/types/ToDoTypes';
 import RefuelingMapper from './SequelizeRefuelingMapper';
-import { Model } from 'sequelize';
 import { RefuelingModelType } from '../database/models/Refueling';
 
 class SequelizeRefuelingsRepository {

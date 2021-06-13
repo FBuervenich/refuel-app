@@ -179,7 +179,7 @@ export default defineComponent({
         totalKilometers: formDataV.totalKilometers || 0,
         dayKilometers: formDataV.dayKilometers || 0,
         fullTank: formDataV.fullTank,
-        madeAt: formDataV.date.toISOString() || new Date().toISOString(),
+        madeAt: formDataV.date || new Date(),
       };
 
       await RefuelingsModule.createRefueling(refueling);

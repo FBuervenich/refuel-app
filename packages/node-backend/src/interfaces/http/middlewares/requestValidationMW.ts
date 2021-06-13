@@ -6,6 +6,10 @@ export const requestValidationMWFactory = <T>(
   requestBodyValidator: (x: any) => x is T
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    next();
+    if (requestBodyValidator(req.body)) {
+      next();
+    } else {
+      throw new Error();
+    }
   };
 };
