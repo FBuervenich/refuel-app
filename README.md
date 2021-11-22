@@ -6,9 +6,9 @@ A simple app to manage car / vehicle refuelings I created to learn and get used 
 
 [Live version](https://refuel-app.fbuervenich.de/)
 
-**Demo credentials:**
-*Username*: `demo@fbuervenich.de` 
-*Password*:   `12345678aA`
+**Demo credentials:**  
+*Username*: `demo@fbuervenich.de`  
+*Password*:   `12345678aA`  
 
 
 ## Frontend Status:
