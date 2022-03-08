@@ -1,6 +1,6 @@
 # refuel-app
 
-A simple app to manage car / vehicle refuelings I created to learn and get used to some new technologies (WIP).
+A simple app to manage car / vehicle refuelings I created to learn and get used to some new technologies (WIP). I am very satisfied with the things I learned in the project.
 
 ## Live Demo
 
